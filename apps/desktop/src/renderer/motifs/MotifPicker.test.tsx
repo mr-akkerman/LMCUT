@@ -129,6 +129,9 @@ describe('Motif package actions', () => {
     // moving the card. Reproduce it before the user's Escape.
     fireEvent.scroll(document.querySelector('.motif-picker-list')!);
     expect(screen.getByRole('menuitem', { name: 'Export Motif ZIP' })).toBeTruthy();
+    // The popup takes focus a turn after it mounts. Until then focus is still
+    // in the dialog, and an Escape typed there closes the dialog itself.
+    await waitFor(() => expect(screen.getByRole('menu').contains(document.activeElement)).toBe(true));
     await user.keyboard('{Escape}');
     expect(onClose).not.toHaveBeenCalled();
     await waitFor(() => expect(screen.queryByRole('menuitem', { name: 'Export Motif ZIP' })).toBeNull());
