@@ -7,7 +7,7 @@ The desktop version is plain SemVer. Bump it with
 package-lock.json together; a version edit in one package fails
 `release.mjs validate`. Native crate versions are independent.
 
-On a push to `main` in `LMCut/LMCut`, electron-ci's `release-plan` job
+On a push to `main` in `mr-akkerman/LMCUT`, electron-ci's `release-plan` job
 compares the version with published GitHub Releases; an unpublished, higher
 version is a release candidate. PRs, scheduled and manual runs never publish.
 A later main push retries an unpublished version whose build failed; a
