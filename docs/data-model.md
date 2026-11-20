@@ -400,9 +400,14 @@ layout box (measured bounds on auto axes).
   content stays put.
 - Scale gestures (inspector and canvas handles) hold Position fixed and write
   only scale tracks.
-- New media and Motifs are placed with Position at half their natural size (top
-  left at 0,0); a plain Group at half its composition size (identity transform);
-  Text at the composition centre.
+- New media is placed with Position at the centre of its composition and one
+  uniform scale that shows the whole picture: a video is fitted to the canvas in
+  either direction, a still is only ever shrunk (`mediaPlacement`). The first
+  video placed in a project with no content sets the root canvas to its own frame
+  size first, as an unrecorded `set_composition`.
+- A Motif is placed with Position at half its natural size (top left at 0,0); a
+  plain Group at half its composition size (identity transform); Text at the
+  composition centre.
 
 `position` is exactly one of `XY { x, y }` or `Path { path: { nodes }, progress }`
 ([ADR 0060](adr/0060-position-has-xy-and-path-modes.md)). Path nodes

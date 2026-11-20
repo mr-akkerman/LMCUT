@@ -2674,3 +2674,49 @@ describe('actor commit pipeline: the marker reconcile', () => {
     expect(logged).toEqual([])
   })
 })
+
+describe('the first clip sets the canvas', () => {
+  const PORTRAIT = '00000000-0000-0000-0000-0000000000a1'
+  const LANDSCAPE = '00000000-0000-0000-0000-0000000000a2'
+  function withClips() {
+    const idGen = seededGen()
+    const initial = blankProject(idGen, 'canvas')
+    const clip = (id: string, width: number, height: number) => {
+      const item = mediaItemTemplate(id, 'Video', 4_000_000)
+      item.metadata.video = { width, height }
+      return item
+    }
+    initial.media_pool[PORTRAIT] = clip(PORTRAIT, 1080, 1920)
+    initial.media_pool[LANDSCAPE] = clip(LANDSCAPE, 1280, 720)
+    const actor = createActor({ initial, idGen, clock: () => '<TS>' })
+    const canvas = () => { const c = root(actor.snapshot()); return { width: c.width, height: c.height } }
+    const clipTransform = (layerId: unknown) => {
+      for (const t of root(actor.snapshot()).tracks) for (const l of t.layers)
+        if (l.id === layerId && l.params.kind === 'VideoClip') return l.params.transform
+      throw new Error('clip not found')
+    }
+    return { actor, track: root(initial).tracks[1].id, before: { width: root(initial).width, height: root(initial).height }, canvas, clipTransform }
+  }
+  const value = (r: DispatchResult) => { if (!r.ok) throw new Error(JSON.stringify(r.error)); return r.value }
+
+  it('a video placed in an empty project gives the canvas its frame, and undo keeps it', () => {
+    const t = withClips()
+    const layer = value(t.actor.command('add_media_layer', { trackId: t.track, tStartUs: 0, mediaId: PORTRAIT }))
+    expect(t.canvas()).toEqual({ width: 1080, height: 1920 })
+    const tr = t.clipTransform(layer)
+    expect([tr.scale_x, tr.scale_y]).toEqual([{ mode: 'Static', value: 1 }, { mode: 'Static', value: 1 }])
+    expect(tr.position).toEqual({ mode: 'XY', x: { mode: 'Static', value: 540 }, y: { mode: 'Static', value: 960 } })
+    value(t.actor.command('project_undo', {}))
+    expect(t.canvas()).toEqual({ width: 1080, height: 1920 })
+  })
+
+  it('a later clip of another shape is fitted to the canvas instead of changing it', () => {
+    const t = withClips()
+    value(t.actor.command('add_media_layer', { trackId: t.track, tStartUs: 0, mediaId: PORTRAIT }))
+    const layer = value(t.actor.command('add_media_layer', { trackId: t.track, tStartUs: 4_000_000, mediaId: LANDSCAPE }))
+    expect(t.canvas()).toEqual({ width: 1080, height: 1920 })
+    const tr = t.clipTransform(layer)
+    expect(tr.position).toEqual({ mode: 'XY', x: { mode: 'Static', value: 540 }, y: { mode: 'Static', value: 960 } })
+    expect(1280 * (tr.scale_x as { value: number }).value).toBe(1080)
+  })
+})

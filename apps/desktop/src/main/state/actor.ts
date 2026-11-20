@@ -623,6 +623,22 @@ export function createActor(opts: ActorOptions): ActorHandle {
     return null
   }
 
+  /** The first video placed in a project gives the root canvas its frame size,
+   *  so a portrait clip opens a portrait project instead of overflowing the
+   *  default one. It is a `setComposition` like any other canvas change: setup,
+   *  unrecorded, and undo walks past it. The condition is the rate lock's own
+   *  (no stored snapshot holds a layer), so the canvas never moves under
+   *  content that was placed against it. */
+  function matchCanvasToFirstClip(trackId: Uuid, mediaId: string): void {
+    const cur = current()
+    const item = cur.media_pool[mediaId as Uuid]
+    const size = item?.kind === 'Video' ? mediaExtent(item) : undefined
+    const root = rootComposition(cur)
+    if (!size || locateTrack(cur, trackId)?.comp !== root) return
+    if (root.width === size.width && root.height === size.height) return
+    if (history.storedSnapshotsHoldLayer()) return
+    setComposition({ width: size.width, height: size.height })
+  }
   /** Event summary for an unrecorded composition patch. Unrecorded events never
    *  reach the history panel, so this is log/e2e-facing only — but the four
    *  strings are load-bearing in logs/e2e, so they stay verbatim. */
@@ -948,14 +964,14 @@ export function createActor(opts: ActorOptions): ActorHandle {
           switch (kind) {
             case 'text': params = textParamsDefault('hello', into()); break
             case 'color': { const c = into(); params = colorParams({ r: 255, g: 0, b: 0, a: 255 }, c.width, c.height); break }
-            case 'video': params = videoClipParams(a.media as Uuid, parseNum(a.src_in_us, 'src_in_us'), parseNum(a.src_out_us, 'src_out_us'), mediaExtent(current().media_pool[a.media as Uuid])); break
+            case 'video': params = videoClipParams(a.media as Uuid, parseNum(a.src_in_us, 'src_in_us'), parseNum(a.src_out_us, 'src_out_us'), mediaExtent(current().media_pool[a.media as Uuid]), into()); break
             // Optional `role` override (default 'music'): mirrors the add-layer-site
             // role stamp at actor.ts add_media_layer auto-pair (role:'dialogue') and the
             // synthesize_speech hybrid (role:'voiceover').
             case 'audio': params = a.role
               ? { ...audioParams(a.media as Uuid, parseNum(a.src_in_us, 'src_in_us'), parseNum(a.src_out_us, 'src_out_us')), role: a.role as AudioRole }
               : audioParams(a.media as Uuid, parseNum(a.src_in_us, 'src_in_us'), parseNum(a.src_out_us, 'src_out_us')); break
-            case 'image': params = imageOverlayParams(a.media as Uuid, mediaExtent(current().media_pool[a.media as Uuid])); break
+            case 'image': params = imageOverlayParams(a.media as Uuid, mediaExtent(current().media_pool[a.media as Uuid]), null, into()); break
             case 'Motif': { const m = motifCatalog.get(a.motif_id as string); params = motifLayerParams(a.motif_id as string, a.motif_version as number, (a.props ?? {}) as Record<string, unknown>, m?.size, m?.graphic_role ?? null); break }
             default: return { ok: false, error: { error: 'InvalidArgument', field: 'kind', detail: `unknown kind ${kind}` } }
           }
@@ -1712,7 +1728,8 @@ export function createActor(opts: ActorOptions): ActorHandle {
           // layer (role=dialogue) on the SAME track and span, then links_create.
           const trackId = parseUuid(wireArgs.trackId, 'trackId')
           const t0 = parseNum(wireArgs.tStartUs, 'tStartUs')
-          const { params, durationUs, autoPairAudio } = prodMediaLayer(wireArgs, current())
+          matchCanvasToFirstClip(trackId, parseStr(wireArgs.mediaId, 'mediaId'))
+          const { params, durationUs, autoPairAudio } = prodMediaLayer(wireArgs, current(), requireTrack(current(), trackId).comp)
           const t1 = t0 + durationUs
           const videoId = commit(HISTORY_SUMMARY.layerAdd, layerRef, { kind: 'Coarse' }, (d) =>
             applyAddLayer(d, idGen, trackId, params, t0, t1))
@@ -1880,14 +1897,14 @@ export function createActor(opts: ActorOptions): ActorHandle {
         const hasAudio = item.metadata.audio != null
         if (c.audio === 'linked' && !hasAudio) throw new McpArgError(`${at}.content.audio: media ${c.media} has no audio stream to link; omit audio or send "none"`, `${at}.content.audio`)
         const pair = c.audio === 'linked' || (c.audio === null && hasAudio && snap.settings.auto_pair_audio_on_import === true)
-        params = videoClipParams(c.media, c.src_in_us, c.src_in_us + span('VideoClip'), mediaExtent(item))
+        params = videoClipParams(c.media, c.src_in_us, c.src_in_us + span('VideoClip'), mediaExtent(item), comp)
         if (pair) audio = { ...audioParams(c.media, c.src_in_us, c.src_in_us + span('Audio')), role: 'dialogue' }
         break
       }
       case 'image': {
         const item = media(c.media)
         if (item.kind !== 'Image') throw new McpArgError(`${at}: media ${c.media} is a ${item.kind} item, not an Image. A Video is kind video, an Audio item kind audio, a subtitle document apply_subtitles.`, `${at}.content.media_id`)
-        params = imageOverlayParams(c.media, mediaExtent(item), c.graphic_role)
+        params = imageOverlayParams(c.media, mediaExtent(item), c.graphic_role, comp)
         break
       }
       case 'audio': {

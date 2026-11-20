@@ -320,6 +320,7 @@ function makeProject(overrides?: Partial<Project> & { tracks?: Composition['trac
   return base
 }
 
+const CANVAS = { width: 1920, height: 1080 }
 describe('prodMediaLayer', () => {
   it('video: durationUs = media duration', () => {
     const p = makeProject({ media_pool: { 'vid': { id: 'vid', label: null, path_abs: '', path_rel: null,
@@ -327,7 +328,7 @@ describe('prodMediaLayer', () => {
       file_hash_blake3: '0', file_size: 0, file_mtime: 0, imported_at: '',
       decode_route: { route: 'bypass' }, conform_path: null,
       waveform_path: null, thumbnails_dir: null } } })
-    const r = prodMediaLayer({ mediaId: 'vid' }, p)
+    const r = prodMediaLayer({ mediaId: 'vid' }, p, CANVAS)
     expect(r.durationUs).toBe(5_000_000)
     expect(r.params.kind).toBe('VideoClip')
   })
@@ -338,7 +339,7 @@ describe('prodMediaLayer', () => {
       file_hash_blake3: '0', file_size: 0, file_mtime: 0, imported_at: '',
       decode_route: { route: 'bypass' }, conform_path: null,
       waveform_path: null, thumbnails_dir: null } } })
-    const r = prodMediaLayer({ mediaId: 'vid' }, p)
+    const r = prodMediaLayer({ mediaId: 'vid' }, p, CANVAS)
     expect(r.durationUs).toBe(2_000_000)
   })
 
@@ -348,7 +349,7 @@ describe('prodMediaLayer', () => {
       file_hash_blake3: '0', file_size: 0, file_mtime: 0, imported_at: '',
       decode_route: { route: 'bypass' }, conform_path: null,
       waveform_path: null, thumbnails_dir: null } } })
-    const r = prodMediaLayer({ mediaId: 'aud' }, p)
+    const r = prodMediaLayer({ mediaId: 'aud' }, p, CANVAS)
     expect(r.params.kind).toBe('Audio')
     if (r.params.kind === 'Audio') expect(r.params.role).toBe('music')
   })
@@ -359,7 +360,7 @@ describe('prodMediaLayer', () => {
       file_hash_blake3: '0', file_size: 0, file_mtime: 0, imported_at: '',
       decode_route: { route: 'bypass' }, conform_path: null,
       waveform_path: null, thumbnails_dir: null } } })
-    const r = prodMediaLayer({ mediaId: 'img' }, p)
+    const r = prodMediaLayer({ mediaId: 'img' }, p, CANVAS)
     expect(r.params.kind).toBe('ImageOverlay')
     expect(r.durationUs).toBe(3_000_000)
   })
@@ -477,7 +478,7 @@ describe('add_media_layer auto-pair', () => {
       file_hash_blake3: '0', file_size: 0, file_mtime: 0, imported_at: '',
       decode_route: { route: 'bypass' }, conform_path: null,
       waveform_path: null, thumbnails_dir: null } } })
-    const r1 = prodMediaLayer({ mediaId: 'vid' }, p1)
+    const r1 = prodMediaLayer({ mediaId: 'vid' }, p1, CANVAS)
     expect(r1.autoPairAudio).not.toBeNull()
     if (r1.autoPairAudio && r1.autoPairAudio.kind === 'Audio') {
       expect(r1.autoPairAudio.role).toBe('dialogue')
@@ -489,7 +490,7 @@ describe('add_media_layer auto-pair', () => {
       file_hash_blake3: '0', file_size: 0, file_mtime: 0, imported_at: '',
       decode_route: { route: 'bypass' }, conform_path: null,
       waveform_path: null, thumbnails_dir: null } } })
-    const r2 = prodMediaLayer({ mediaId: 'vid' }, p2)
+    const r2 = prodMediaLayer({ mediaId: 'vid' }, p2, CANVAS)
     expect(r2.autoPairAudio).toBeNull()
 
     // Video with audio but setting off → autoPairAudio null
@@ -502,7 +503,7 @@ describe('add_media_layer auto-pair', () => {
       settings: { preview_width: 1280, preview_height: 720, autosave_interval_secs: 60,
         history_capacity: 200, auto_pair_audio_on_import: false,
         prefer_proxies: false, proxy_overrides: {}, shot_review: null, pause_review: null } })
-    const r3 = prodMediaLayer({ mediaId: 'vid' }, p3)
+    const r3 = prodMediaLayer({ mediaId: 'vid' }, p3, CANVAS)
     expect(r3.autoPairAudio).toBeNull()
   })
 })

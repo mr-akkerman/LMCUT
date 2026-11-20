@@ -3,7 +3,7 @@ import { seededGen, type IdGen } from '../ids'
 import { blankProject, type Project, type MediaItem } from '../model'
 import { applyAddLayer } from './add'
 import { isCommandFailure } from '../errors'
-import { videoClipParams, audioParams, imageOverlayParams, applySeparateAudio, mediaItemTemplate, applySetMediaDerivatives, applySetMediaWorkspacePaths, referencingLayers } from './media'
+import { videoClipParams, audioParams, imageOverlayParams, mediaPlacement, applySeparateAudio, mediaItemTemplate, applySetMediaDerivatives, applySetMediaWorkspacePaths, referencingLayers } from './media'
 import { group, groupedProject, root } from '../__tests__/fixtures/project'
 
 const MID = '00000000-0000-0000-0000-0000000000aa'
@@ -19,6 +19,25 @@ describe('media param builders', () => {
         scale_y: { mode: 'Static', value: 1 }, rotation_deg: { mode: 'Static', value: 0 }, anchor_x: { mode: 'Static', value: 0.5 }, anchor_y: { mode: 'Static', value: 0.5 }, scale_linked: true },
       opacity: { mode: 'Static', value: 1 }, crop: null, flip_h: false, flip_v: false, blend_mode: 'Normal',
       fade_in_us: 0, fade_out_us: 0 })
+  })
+  it('mediaPlacement: a picture larger than the canvas is centred and shown whole', () => {
+    const canvas = { width: 1920, height: 1080 }
+    const size = { width: 1080, height: 1920 }
+    const t = mediaPlacement(size, canvas, true)
+    expect(t.position).toEqual({ mode: 'XY', x: { mode: 'Static', value: canvas.width / 2 }, y: { mode: 'Static', value: canvas.height / 2 } })
+    expect(t.scale_x.value).toBe(t.scale_y.value)
+    expect(size.height * t.scale_y.value).toBe(canvas.height)
+    expect(size.width * t.scale_x.value).toBeLessThanOrEqual(canvas.width)
+  })
+  it('mediaPlacement: a picture smaller than the canvas grows to it only when asked to fill', () => {
+    const canvas = { width: 1920, height: 1080 }
+    const size = { width: 960, height: 540 }
+    expect(mediaPlacement(size, canvas, false).scale_x.value).toBe(1)
+    expect(size.width * mediaPlacement(size, canvas, true).scale_x.value).toBe(canvas.width)
+  })
+  it('mediaPlacement: a picture of the canvas size keeps the identity scale', () => {
+    const canvas = { width: 1920, height: 1080 }
+    expect(mediaPlacement(canvas, canvas, true).scale_x.value).toBe(1)
   })
   it('audioParams: standalone role is music (kebab-case wire form), gain/pan 0', () => {
     const p = audioParams(MID, 0, 3_000_000) as Extract<ReturnType<typeof audioParams>, { kind: 'Audio' }>
