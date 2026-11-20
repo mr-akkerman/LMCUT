@@ -45,7 +45,7 @@ export const CACHE_DIR = process.env.WEFTCUT_BENCH_CACHE
 const FFMPEG = process.env.WEFTCUT_BENCH_FFMPEG || 'ffmpeg'
 const FFPROBE = process.env.WEFTCUT_BENCH_FFPROBE || 'ffprobe'
 // Wikimedia asks for an identifying User-Agent on automated downloads.
-const USER_AGENT = 'WeftCutBench/0.1 (fixture fetch; https://github.com/UncleChair/WeftCut)'
+const USER_AGENT = 'WeftCutBench/0.1 (fixture fetch; https://github.com/mr-akkerman/LMCUT)'
 
 const ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/
 const HEX64 = /^[0-9a-f]{64}$/

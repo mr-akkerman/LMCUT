@@ -45,7 +45,7 @@ with a Cloudflare challenge.
   video layer and a frame Motif.
 - **Exported Motif packages carry no media**; the picture belongs to the
   project.
-- **WeftCut calls no image library.** Pictures come from the user's media,
+- **LMCut calls no image library.** Pictures come from the user's media,
   a still from the footage, an image the agent's model generates, or an SVG
   it draws, each imported like any file. A point no picture covers is
   reported, not fetched. The app records no licences or credits.

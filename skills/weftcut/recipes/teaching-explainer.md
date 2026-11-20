@@ -112,7 +112,7 @@ the colour under a caption, so look at what export will render.
 
 ## handoff
 
-The deliverable is the edited project in WeftCut.
+The deliverable is the edited project in LMCut.
 - Leave tacks on what is unresolved.
 - End the work session. If the app audits and holds it, settle what it
   shows, then end it again.

@@ -32,7 +32,7 @@ const BENCH_DIR = path.dirname(HERE)
 export interface RemoteOptions {
   /** ssh alias (~/.ssh/config). */
   alias: string
-  /** The WeftCut checkout on the host, already built (`out\main\index.js`). */
+  /** The LMCut checkout on the host, already built (`out\main\index.js`). */
   repo: string
   /** Keep the run directory (profile, project, mirror) after the run. */
   keep: boolean

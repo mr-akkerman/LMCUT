@@ -511,7 +511,7 @@ export interface E2EHook {
   textBoxProbe(layerId: string): TextBoxProbe | null;
   /// Live Dock Workspace snapshot as plain JSON — open Panel kinds (sorted), the
   /// focused/active Panel, the maximized Panel, and whether the workspace is
-  /// empty. WeftCut-owned observability so the Electron acceptance specs can
+  /// empty. LMCut-owned observability so the Electron acceptance specs can
   /// assert focus cycling, maximize/restore, open/close, and empty recovery
   /// without reaching into Dockview's private DOM or serialized JSON. Null before
   /// the workspace controller mounts. Dev/e2e only.

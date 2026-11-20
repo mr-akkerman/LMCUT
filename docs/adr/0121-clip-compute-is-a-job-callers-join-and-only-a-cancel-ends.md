@@ -9,7 +9,7 @@ Date: 2026-10-19
 ## Context
 
 `transcribe_clip` and `describe_clip` run for minutes on a long source.
-Through the stdio shim they failed after 60 s with "WeftCut is not running"
+Through the stdio shim they failed after 60 s with "LMCut is not running"
 while the app kept working (#67); the shim's idle window is re-armed by app
 progress, and the app sent none. Retries after a timeout each started another
 job (three retries, three jobs), a person's press on the same clip started one

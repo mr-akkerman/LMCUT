@@ -50,7 +50,7 @@ test('external MCP client connects, calls tools, and bearer is enforced', async 
   const startScreen = (await page.evaluate(() => (window as any).api.backend.invoke('project_summary', {}))) as { track_count: number }
   const refused = await client.callTool({ name: 'add_track', arguments: {} })
   expect((refused as { isError?: boolean }).isError).toBe(true)
-  expect((refused.content as Array<{ text: string }>)[0].text).toContain('No project is open in WeftCut')
+  expect((refused.content as Array<{ text: string }>)[0].text).toContain('No project is open in LMCut')
   expect((refused.structuredContent as { error?: string } | undefined)?.error).toBe('NoProjectOpen')
   const stillStartScreen = (await page.evaluate(() => (window as any).api.backend.invoke('project_summary', {}))) as { track_count: number }
   expect(stillStartScreen.track_count).toBe(startScreen.track_count)

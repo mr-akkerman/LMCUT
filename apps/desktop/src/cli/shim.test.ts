@@ -25,7 +25,7 @@ import type { McpAuth, ShimEnv } from './paths.js'
 const SE: ShimEnv = {
   platform: 'win32',
   env: {},
-  execPath: 'C:\\Program Files\\WeftCut\\WeftCut.exe',
+  execPath: 'C:\\Program Files\\LMCut\\LMCut.exe',
   scriptPath: 'C:\\ud\\cli\\weftcut-mcp.cjs',
   homedir: 'C:\\Users\\u',
 }
@@ -253,7 +253,7 @@ describe('up state', () => {
   it('weftcut_status reports running', async () => {
     open = await harness({ appUp: true })
     const status = await open.client.callTool({ name: 'weftcut_status', arguments: {} })
-    expect(JSON.stringify(status.content)).toContain('WeftCut is running')
+    expect(JSON.stringify(status.content)).toContain('LMCut is running')
   })
 
   it('weftcut_status names the open project, or says none is open', async () => {
@@ -427,7 +427,7 @@ describe('the app session carries the driving client name, not the shim', () => 
 describe('long tool calls: idle timeout, progress, cancel', () => {
   // The bug (#67): the app hop ran under the SDK's flat 60 s default, and its
   // RequestTimeout was read as "the app went away" — the bridge tore the
-  // session down and the agent was told WeftCut was not running while the
+  // session down and the agent was told LMCut was not running while the
   // app was still working on the call.
   const FAST = { WEFTCUT_MCP_TOOL_TIMEOUT_MS: '80' }
   const textOf = (r: unknown): string => (r as { content: { text: string }[] }).content[0]!.text
@@ -440,7 +440,7 @@ describe('long tool calls: idle timeout, progress, cancel', () => {
     const result = await open.client.callTool({ name: 'slow', arguments: {} })
     expect(result.isError).toBe(true)
     const msg = textOf(result)
-    expect(msg).toContain('WeftCut is running')
+    expect(msg).toContain('LMCut is running')
     expect(msg).toContain('still working inside the app')
     expect(msg).toContain('80 ms')
     expect(msg).toContain('joins the in-flight job')
@@ -464,7 +464,7 @@ describe('long tool calls: idle timeout, progress, cancel', () => {
     open.freeze() // the app stops answering — the liveness ping included
     const err = await pending
     expect(err).toBeInstanceOf(McpError)
-    expect((err as McpError).message).toContain('WeftCut is not running')
+    expect((err as McpError).message).toContain('LMCut is not running')
     expect(open.shim.bridge.isUp()).toBe(false)
   })
 

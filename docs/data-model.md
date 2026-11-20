@@ -85,7 +85,7 @@ with no persisted offset. At 23.976 / 29.97 / 59.94 an NDF hour is 3603.6 s of
 wall clock. Where a **duration** is displayed at a fractional rate (export range,
 composition duration in Settings), the wall-clock figure is shown beside it.
 Drop-frame is **declined**: it only relabels, and its consumers are interchange
-formats WeftCut does not write. If interchange is built, DF and a non-zero start
+formats LMCut does not write. If interchange is built, DF and a non-zero start
 timecode share one migration and one insertion point (`formatTimecode` /
 `parseTimecode` in `renderer/frames.ts`).
 

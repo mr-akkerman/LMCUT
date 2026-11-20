@@ -34,7 +34,7 @@ import { VECTORS_PATH, compareReadback, downscaleReference, syntheticFrame } fro
 // directory.
 
 const addon = fileURLToPath(new URL('../../native/index.js', import.meta.url))
-const READER_SERVICE = 'WeftCut Motif reader'
+const READER_SERVICE = 'LMCut Motif reader'
 
 type Lane = 'utility' | 'texture' | 'fallback'
 type Div = 1 | 2 | 4

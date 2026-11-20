@@ -11,7 +11,7 @@
 #
 # Ground rules (README "Remote app host"):
 #   - Everything the bench creates lives under %USERPROFILE%\weftcut-bench.
-#   - The user's own profile (%APPDATA%\WeftCut) is only READ: config files are
+#   - The user's own profile (%APPDATA%\LMCut) is only READ: config files are
 #     read and rewritten into the bench profile, model files are hard-linked
 #     out of it. Nothing is written into it, and its mcp_auth.json is never read.
 #   - Only processes this bench started are stopped: the app's root process is
@@ -30,7 +30,7 @@ $ProgressPreference = 'SilentlyContinue'
 $A = $null
 if ($ArgsB64) { $A = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($ArgsB64)) | ConvertFrom-Json }
 $Root = Join-Path $env:USERPROFILE 'weftcut-bench'
-$UserProfileDir = Join-Path $env:APPDATA 'WeftCut'
+$UserProfileDir = Join-Path $env:APPDATA 'LMCut'
 $TaskPath = '\WeftCutBench\'
 $Utf8 = New-Object System.Text.UTF8Encoding $false
 

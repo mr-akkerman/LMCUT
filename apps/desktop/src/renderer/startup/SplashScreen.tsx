@@ -140,7 +140,7 @@ export function SplashScreen({
         </svg>
       </div>
       <div className="splash-copy">
-        <div className="splash-wordmark">WeftCut</div>
+        <div className="splash-wordmark">LMCut</div>
         <div className="splash-progress">
           <span className="splash-progress-dot" aria-hidden="true" />
           <span className="splash-progress-message">{statusText}</span>

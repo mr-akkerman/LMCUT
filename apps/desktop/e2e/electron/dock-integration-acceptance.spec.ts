@@ -30,7 +30,7 @@ const SRT_PATH = path.resolve(__dirname, "../fixtures/subtitles/overlapping.srt"
 // the pristine built-in Editing baseline; the app-level Workspace document
 // otherwise persists layout across launches and would leak between specs.
 //
-// Observability is WeftCut-owned: `dockWorkspaceProbe()` reports open Panels,
+// Observability is LMCut-owned: `dockWorkspaceProbe()` reports open Panels,
 // the focused/active Panel, the maximized Panel, and emptiness; the `dockPanel`
 // / `dockTab` driver helpers and `project_summary` carry the rest. No test
 // asserts on Dockview's group classes or serialized JSON.

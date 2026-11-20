@@ -24,14 +24,14 @@ const canonical = (p: string): string => {
 }
 
 /// Deletes `<dir>/Cache/raster` and nothing else, after retiring every capture
-/// host. Refuses a folder that is not a closed WeftCut project, and a raster
+/// host. Refuses a folder that is not a closed LMCut project, and a raster
 /// folder that resolves outside the project (a symlinked `Cache`).
 export async function motifColdStart(dir: unknown, deps: MotifColdStartDeps): Promise<MotifColdStartResult> {
   if (!deps.enabled) throw new Error('Motif cold start is available in dev builds only')
   if (typeof dir !== 'string' || !path.isAbsolute(dir)) throw new Error('Motif cold start needs an absolute project folder')
   const root = canonical(dir)
   if (!fs.statSync(path.join(root, 'project.json'), { throwIfNoEntry: false })?.isFile()) {
-    throw new Error('Motif cold start needs a WeftCut project folder')
+    throw new Error('Motif cold start needs an LMCut project folder')
   }
   if (deps.transitioning() || deps.openFolders().some(open => open && canonical(open) === root)) {
     throw new Error('Close the project before dropping its Motif cache')

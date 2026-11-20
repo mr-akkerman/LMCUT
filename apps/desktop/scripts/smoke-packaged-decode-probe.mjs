@@ -7,7 +7,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { ownProcessTree, closeProcessTree } from '../e2e/lib/process-cleanup.mjs'
 
-const executablePath = path.resolve(process.argv[2] ?? 'release/mac-arm64/WeftCut.app/Contents/MacOS/WeftCut')
+const executablePath = path.resolve(process.argv[2] ?? 'release/mac-arm64/LMCut.app/Contents/MacOS/LMCut')
 assert.equal(process.platform, 'darwin', 'Packaged VideoToolbox probe smoke requires macOS')
 assert.ok(fs.existsSync(executablePath), `Packaged executable missing: ${executablePath}`)
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'weftcut-packaged-probe-'))

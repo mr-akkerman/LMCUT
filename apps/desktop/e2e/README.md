@@ -1,4 +1,4 @@
-# WeftCut E2E suite — authoring & maintenance guide
+# LMCut E2E suite — authoring & maintenance guide
 
 These tests drive the **real packaged Electron app** (via Playwright's Electron
 support), exercising the actual PixiJS/WebCodecs renderer + Rust (napi) ffmpeg
@@ -102,7 +102,7 @@ After pushing a candidate branch, verify that cell on Windows without retries
 or packaging:
 
 ```bash
-gh workflow run electron-ci.yml --repo WeftCut/WeftCut --ref <branch> \
+gh workflow run electron-ci.yml --repo LMCut/LMCut --ref <branch> \
   -f os=windows-latest -f package=false -f decode_e2e=true \
   -f 'e2e_args=export-native-wedges.spec.ts --grep=backward --retries=0'
 ```
@@ -135,7 +135,7 @@ For a full three-platform CI sweep, use the dedicated `full` input so the
 workflow retains its parallel slices and cross-OS determinism comparison:
 
 ```bash
-gh workflow run electron-ci.yml --repo WeftCut/WeftCut --ref main \
+gh workflow run electron-ci.yml --repo LMCut/LMCut --ref main \
   -f os=all -f full=true -f decode_e2e=true -f package=true
 ```
 

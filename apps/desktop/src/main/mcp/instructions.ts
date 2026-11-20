@@ -17,7 +17,7 @@
 // Kept under a size a session pays without noticing — the test caps it.
 
 export const MCP_INSTRUCTION_LINES: ReadonlyArray<string> = [
-  "WeftCut is a desktop video editor; the user watches the same project live, and every edit you commit lands in their undo history. A video the user asks you to edit is the project open in WeftCut, named or not.",
+  "LMCut is a desktop video editor; the user watches the same project live, and every edit you commit lands in their undo history. A video the user asks you to edit is the project open in LMCut, named or not.",
   "1. Read `project://tracks` (or `read_project` view \"tracks\") before your first edit; ids come from reads, never memory.",
   "2. Every mutator answers with the committed record (minted ids, the span as it landed, `adjusted` for a grid snap); verify from it before reporting.",
   "3. A refusal (isError) names the cause and the fix: act on it, never retry the call verbatim.",

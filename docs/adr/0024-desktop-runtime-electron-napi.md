@@ -8,7 +8,7 @@ Date: 2026-06-27
 
 ## Context
 
-WeftCut ships on Windows, macOS and Linux. A system-webview runtime
+LMCut ships on Windows, macOS and Linux. A system-webview runtime
 (WebView2 / WKWebView / WebKitGTK) made codec, transport and capture behavior
 diverge per OS, a recurring tax that blocked cross-platform parity. The heavy
 runtime work (PixiJS WebGPU compositor, WebCodecs decode) already lives in the

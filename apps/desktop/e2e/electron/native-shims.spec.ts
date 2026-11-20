@@ -61,7 +61,7 @@ test('notification:send is wired (no missing-handler error)', async () => {
   // channel exists. An unregistered channel would reject "No handler registered".
   const notifyResult = await page.evaluate(async () => {
     try {
-      await (window as any).api.notification.send({ title: 'WeftCut', body: 'hi' })
+      await (window as any).api.notification.send({ title: 'LMCut', body: 'hi' })
       return 'ok'
     } catch (e) {
       return String(e)

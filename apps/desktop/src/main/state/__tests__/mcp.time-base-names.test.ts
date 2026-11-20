@@ -1,6 +1,6 @@
 // apps/desktop/src/main/state/__tests__/mcp.time-base-names.test.ts
 // Constraint 2 of docs/mcp.md ("The time base is in the name"), as a gate.
-// WeftCut has three clocks — the timeline, a media file's own time and a
+// LMCut has three clocks — the timeline, a media file's own time and a
 // layer's local time — and an agent that reads one where it meant another
 // tacks, splits or keys at the wrong instant without any refusal to warn it.
 // So every time-valued name on the MCP surface says which clock it reads:

@@ -47,7 +47,7 @@ const SKILLS_DIR = "C:\\ud\\skills";
 
 const INFO_SHIM = {
   ...INFO,
-  exe_path: "C:\\Program Files\\WeftCut\\WeftCut.exe",
+  exe_path: "C:\\Program Files\\LMCut\\LMCut.exe",
   appimage: null,
   user_data: "C:\\ud",
   shim_path: "C:\\ud\\cli\\weftcut-mcp.cjs",
@@ -112,7 +112,7 @@ describe("AgentSection", () => {
 
     expect(clipboard.writeText).toHaveBeenCalledWith(
       expect.stringMatching(
-        /Configure the WeftCut MCP server for me[\s\S]*URL: http:\/\/127\.0\.0\.1:4711\/mcp[\s\S]*Bearer secret-token[\s\S]*preserve all other settings/,
+        /Configure the LMCut MCP server for me[\s\S]*URL: http:\/\/127\.0\.0\.1:4711\/mcp[\s\S]*Bearer secret-token[\s\S]*preserve all other settings/,
       ),
     );
   });
@@ -126,7 +126,7 @@ describe("AgentSection", () => {
       await screen.findByRole("button", { name: "Copy setup prompt" }),
     );
     const prompt = clipboard.writeText.mock.calls[0]?.[0] as string;
-    expect(prompt).toContain("Configure the WeftCut MCP server");
+    expect(prompt).toContain("Configure the LMCut MCP server");
     expect(prompt).not.toContain("Skill");
   });
 
@@ -139,7 +139,7 @@ describe("AgentSection", () => {
 
     expect(clipboard.writeText).toHaveBeenCalledWith(
       expect.stringMatching(
-        /请为我配置 WeftCut MCP 服务[\s\S]*Bearer secret-token[\s\S]*保留所有其他设置和 MCP 服务/,
+        /请为我配置 LMCut MCP 服务[\s\S]*Bearer secret-token[\s\S]*保留所有其他设置和 MCP 服务/,
       ),
     );
   });
@@ -244,7 +244,7 @@ describe("AgentSection", () => {
     );
     expect(ipc.reinstallSkills).toHaveBeenCalledTimes(1);
     expect(
-      await screen.findByRole("textbox", { name: "WeftCut's Skill copy" }),
+      await screen.findByRole("textbox", { name: "LMCut's Skill copy" }),
     ).toBeTruthy();
     expect(screen.queryByText(/npm run build:skills/)).toBeNull();
     expect(screen.queryByRole("button", { name: "Try again" })).toBeNull();
@@ -375,7 +375,7 @@ describe("AgentSection with the stdio shim installed", () => {
     // The prompt above hands the folder to an agent; a user installing it by
     // hand needs the same path on screen, and a way into the file manager.
     const field = (await screen.findByRole("textbox", {
-      name: "WeftCut's Skill copy",
+      name: "LMCut's Skill copy",
     })) as HTMLInputElement;
     expect(field.value).toBe(path);
     expect(field.readOnly).toBe(true);
@@ -388,7 +388,7 @@ describe("AgentSection with the stdio shim installed", () => {
     expect(shell.reveal).toHaveBeenCalledWith(path);
     // The app's copy is the only one the panel sees; it says the agent's own
     // copy has to be replaced after an upgrade instead of calling it installed.
-    expect(screen.getByText(/replace it after each WeftCut upgrade/)).toBeTruthy();
+    expect(screen.getByText(/replace it after each LMCut upgrade/)).toBeTruthy();
     expect(screen.queryByText(/installed/i)).toBeNull();
   });
 

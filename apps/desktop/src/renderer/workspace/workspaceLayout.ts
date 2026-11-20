@@ -16,7 +16,7 @@ import {
   type PanelId,
 } from "./panelRegistry";
 
-/** Schema version of a WeftCut layout snapshot. Bump on any incompatible change
+/** Schema version of an LMCut layout snapshot. Bump on any incompatible change
  *  to the snapshot shape; a snapshot with a different version is discarded on
  *  read (falls through to the next fallback level) rather than misapplied. */
 export const WEFTCUT_LAYOUT_VERSION = 1;

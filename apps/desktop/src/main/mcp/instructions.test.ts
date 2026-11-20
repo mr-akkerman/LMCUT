@@ -49,7 +49,7 @@ describe('initialize instructions', () => {
     const backend = { mcpCatalog: async () => RUST_CATALOG, mcpCallTool: async () => { throw new Error('unused') }, mcpReadResource: async () => '{"ok":true,"result":{"contents":[]}}' } as any
     const app = buildMcpServer(backend, { version: '1.2.3' })
     const shim = createShim({
-      se: { platform: 'linux', env: {}, execPath: '/opt/WeftCut/weftcut', scriptPath: '/ud/cli/weftcut-mcp.cjs', homedir: '/home/u' },
+      se: { platform: 'linux', env: {}, execPath: '/opt/LMCut/weftcut', scriptPath: '/ud/cli/weftcut-mcp.cjs', homedir: '/home/u' },
       userDataDir: '/ud',
       version: '1.2.3',
       readAuth: () => null,

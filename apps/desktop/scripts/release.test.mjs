@@ -40,10 +40,10 @@ async function assets(t) {
   const data = Buffer.from('installer fixture')
   const sha512 = createHash('sha512').update(data).digest('base64')
   // Per-target os/arch names, as electron-builder writes them (release.mjs INSTALLERS).
-  const files = [['win', 'x64', 'exe'], ['linux', 'x86_64', 'AppImage'], ['linux', 'amd64', 'deb'], ['mac', 'arm64', 'dmg']].map(([os, arch, ext]) => ({ url: `WeftCut-${os}-${arch}.${ext}`, size: data.length, sha512 }))
+  const files = [['win', 'x64', 'exe'], ['linux', 'x86_64', 'AppImage'], ['linux', 'amd64', 'deb'], ['mac', 'arm64', 'dmg']].map(([os, arch, ext]) => ({ url: `LMCut-${os}-${arch}.${ext}`, size: data.length, sha512 }))
   for (const file of files) await fs.writeFile(path.join(dir, file.url), data)
-  await fs.writeFile(path.join(dir, 'WeftCut-win-x64.exe.blockmap'), 'blockmap fixture')
-  await fs.writeFile(path.join(dir, 'WeftCut-mac-arm64.dmg.blockmap'), 'blockmap fixture')
+  await fs.writeFile(path.join(dir, 'LMCut-win-x64.exe.blockmap'), 'blockmap fixture')
+  await fs.writeFile(path.join(dir, 'LMCut-mac-arm64.dmg.blockmap'), 'blockmap fixture')
   for (const [name, subset] of [['latest.yml', files.slice(0, 1)], ['latest-linux.yml', files.slice(1, 3)], ['latest-mac.yml', files.slice(3)]]) {
     await fs.writeFile(path.join(dir, name), JSON.stringify({ version: '0.1.1', files: subset }))
   }
@@ -63,8 +63,8 @@ test('release validation refuses missing macOS output', async t => {
   // but never uploaded, and a manifest that lists a DMG that is not there, both
   // stop the release before a draft exists.
   const withoutDmg = await assets(t)
-  await fs.unlink(path.join(withoutDmg, 'WeftCut-mac-arm64.dmg'))
-  await assert.rejects(validateAssets(withoutDmg, '0.1.1'), /Missing release asset: WeftCut-mac-arm64.dmg/)
+  await fs.unlink(path.join(withoutDmg, 'LMCut-mac-arm64.dmg'))
+  await assert.rejects(validateAssets(withoutDmg, '0.1.1'), /Missing release asset: LMCut-mac-arm64.dmg/)
   const withoutManifest = await assets(t)
   await fs.unlink(path.join(withoutManifest, 'latest-mac.yml'))
   await assert.rejects(validateAssets(withoutManifest, '0.1.1'), /Missing release asset: latest-mac.yml/)
@@ -74,16 +74,16 @@ test('release notes name every installer the validator requires', () => {
   // Version-less on purpose: releases/latest/download/<asset> must stay a stable
   // link (electron-builder.yml artifactName), so a version creeping back in here
   // is a regression, not a naming preference.
-  for (const file of ['WeftCut-win-x64.exe', 'WeftCut-linux-x86_64.AppImage', 'WeftCut-linux-amd64.deb', 'WeftCut-mac-arm64.dmg']) {
+  for (const file of ['LMCut-win-x64.exe', 'LMCut-linux-x86_64.AppImage', 'LMCut-linux-amd64.deb', 'LMCut-mac-arm64.dmg']) {
     assert.ok(notes.includes(file), `notes omit ${file}`)
   }
-  assert.doesNotMatch(notes, /WeftCut-\d+\.\d+\.\d+/)
+  assert.doesNotMatch(notes, /LMCut-\d+\.\d+\.\d+/)
   // The Gatekeeper escape hatch is the one line a blocked macOS user needs verbatim.
-  assert.ok(notes.includes('xattr -dr com.apple.quarantine /Applications/WeftCut.app'))
+  assert.ok(notes.includes('xattr -dr com.apple.quarantine /Applications/LMCut.app'))
 })
 test('release validation refuses corrupt installer bytes', async t => {
   const dir = await assets(t)
-  await fs.writeFile(path.join(dir, 'WeftCut-win-x64.exe'), 'corrupted fixture')
+  await fs.writeFile(path.join(dir, 'LMCut-win-x64.exe'), 'corrupted fixture')
   await assert.rejects(validateAssets(dir, '0.1.1'), /Checksum mismatch/)
 })
 test('release validation refuses stale manifests and unexpected assets', async t => {
@@ -91,6 +91,6 @@ test('release validation refuses stale manifests and unexpected assets', async t
   await fs.writeFile(path.join(dir, 'latest.yml'), JSON.stringify({ version: '0.1.0', files: [] }))
   await assert.rejects(validateAssets(dir, '0.1.1'), /Invalid version/)
   // An Intel DMG has no leg that builds it; one appearing means a stray file.
-  await fs.writeFile(path.join(dir, 'WeftCut-mac-x64.dmg'), '')
+  await fs.writeFile(path.join(dir, 'LMCut-mac-x64.dmg'), '')
   await assert.rejects(validateAssets(dir, '0.1.1'), /Unexpected release asset/)
 })

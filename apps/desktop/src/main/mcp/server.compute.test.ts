@@ -122,7 +122,7 @@ describe('a clip-compute call over MCP', () => {
     expect(h.computeJobs.cancel(jobId)).toBe(true)
     const result = await call as { isError?: boolean; content: Array<{ text: string }>; structuredContent?: Record<string, unknown> }
     expect(result.isError).toBe(true)
-    expect(result.content[0]!.text).toContain('Cancelled in WeftCut by the user')
+    expect(result.content[0]!.text).toContain('Cancelled in LMCut by the user')
     expect(result.structuredContent).toMatchObject({ code: 'cancelled', job_id: jobId, cancelled_by: 'user' })
   })
 

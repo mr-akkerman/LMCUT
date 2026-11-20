@@ -33,5 +33,5 @@ what not to switch on.
 ## Rule kept from the research
 
 Library JSON is never the durable schema: the adapter wraps it in a versioned
-WeftCut layout record (`WEFTCUT_LAYOUT_VERSION`) so a library migration happens
+LMCut layout record (`WEFTCUT_LAYOUT_VERSION`) so a library migration happens
 at one boundary.

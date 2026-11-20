@@ -42,7 +42,7 @@ export function installWindowsNotifications(
   const stamp = stampInstallerShortcut(host, opts.installerShortcut, identity.toastActivatorClsid)
   host.handleActivation(opts.onActivation)
   // At startup, not on the first notification: a click on a notification
-  // while WeftCut is closed starts it with -Embedding, and Windows terminates
+  // while LMCut is closed starts it with -Embedding, and Windows terminates
   // that process if it has not registered the activator within 120 s.
   host.registerActivator()
   return stamp

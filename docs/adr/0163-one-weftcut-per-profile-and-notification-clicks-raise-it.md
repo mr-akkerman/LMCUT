@@ -2,13 +2,13 @@
 status: accepted
 ---
 
-# One WeftCut per profile, and a notification click raises it
+# One LMCut per profile, and a notification click raises it
 
 Date: 2026-11-10
 
 ## Context
 
-WeftCut sends Windows notifications (export finished, compute job notices)
+LMCut sends Windows notifications (export finished, compute job notices)
 through Electron's `Notification`. Electron shows them through its built-in
 COM toast activator. On the first notification of a run it writes
 `<Programs>\<productName>.lnk` with the AUMID and a toast activator CLSID, and
@@ -19,11 +19,11 @@ one, and Electron adopts whatever CLSID the existing shortcut carries.
 Measured on per-user installs of 0.6.0 and 0.7.0:
 
 - The first notification rewrote the installer's Start Menu shortcut
-  (`WeftCut.lnk`, the same path), giving it a random CLSID and replacing its
+  (`LMCut.lnk`, the same path), giving it a random CLSID and replacing its
   description and icon fields.
 - A click while the app ran reached the process, which had no handler: the
   window stayed in the background.
-- A click while the app was closed started `WeftCut.exe -Embedding`. Electron
+- A click while the app was closed started `LMCut.exe -Embedding`. Electron
   registers the activator only when it first shows a notification, so the new
   process never did; after 120 s DCOM logged event 10010 and terminated it.
 - An update recreated the shortcut without a CLSID; the next run wrote a new
@@ -35,7 +35,7 @@ dev opened Electron's empty default window, and on a machine with both, two
 shortcuts claimed one AUMID.
 
 Nothing stopped a second launch from opening a second editor on the same
-profile, with its own backend and MCP host. WeftCut never offered that, and
+profile, with its own backend and MCP host. LMCut never offered that, and
 video editors normally don't.
 
 ## Decision
@@ -46,7 +46,7 @@ video editors normally don't.
   `second-instance`. Electron keys the lock on the userData directory, so runs
   with their own `--user-data-dir` stay independent.
 - **Fixed identities** (`appIdentity.ts`). The installed app keeps AUMID
-  `dev.weftcut.desktop` (equal to electron-builder's `appId`) and gets a fixed
+  `dev.lmcut.desktop` (equal to electron-builder's `appId`) and gets a fixed
   toast activator CLSID. An unpackaged run gets its own AUMID and CLSID.
 - **The app stamps its CLSID onto the installer's shortcut** at startup,
   before Electron reads it, with `shell.writeShortcutLink(…, 'update', …)`,

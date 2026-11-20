@@ -382,7 +382,7 @@ export async function refuseUnheldSources(tsHost: Pick<TsActorHost, 'poolFiles'>
     if (!media) continue
     const state = await tsHost.poolFiles.settle(media)
     if (state === 'missing') return toolErrorResult({ code: 'invalid_request', message: `${name}: the source file ${media.path_abs} is missing — import the original file again to restore it`, data: { error: 'SourceMissing', media_id: media.id } })
-    if (state === 'changed') return toolErrorResult({ code: 'invalid_request', message: `${name}: ${media.path_abs} was changed outside WeftCut and no longer holds this media — import the original file again to restore it, or import the new file as new media`, data: { error: 'SourceChanged', media_id: media.id } })
+    if (state === 'changed') return toolErrorResult({ code: 'invalid_request', message: `${name}: ${media.path_abs} was changed outside LMCut and no longer holds this media — import the original file again to restore it, or import the new file as new media`, data: { error: 'SourceChanged', media_id: media.id } })
   }
   return null
 }

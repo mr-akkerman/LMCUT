@@ -1,6 +1,6 @@
 # Craft
 
-Production rules that hold for every WeftCut job, whatever the style: numbers
+Production rules that hold for every LMCut job, whatever the style: numbers
 and thresholds (how long a title stays on screen, how far text sits from the
 frame edge, how long an audio fade runs) and named anti-patterns (a default
 that makes an edit look generic, with what to do instead).

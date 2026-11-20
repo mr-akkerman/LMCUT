@@ -89,7 +89,7 @@ function main(argv) {
   const hostKind = values.host ?? (argv.some((a) => a === '--remote' || a.startsWith('--remote=')) ? 'remote' : 'local')
   if (!['local', 'remote'].includes(hostKind)) problems.push('--host must be local or remote')
   if (hostKind === 'remote' && !values.remote) problems.push('--host remote needs --remote <ssh alias> (or WEFTCUT_BENCH_REMOTE)')
-  if (hostKind === 'remote' && !values['remote-repo']) problems.push('--host remote needs --remote-repo <the built WeftCut checkout on the host> (or WEFTCUT_BENCH_REMOTE_REPO)')
+  if (hostKind === 'remote' && !values['remote-repo']) problems.push('--host remote needs --remote-repo <the built LMCut checkout on the host> (or WEFTCUT_BENCH_REMOTE_REPO)')
   if (hostKind === 'local' && values['keep-remote']) problems.push('--keep-remote applies to --host remote only')
   if (problems.length) {
     console.error(`[bench] ${problems.join('; ')}\n${USAGE}`)

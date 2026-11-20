@@ -57,7 +57,7 @@ export const CONTENT_CATALOG: readonly ContentItem[] = [
         fields: { binary: "whisper-bin-ubuntu-x64/whisper-cli" },
       },
       // whisper.cpp publishes no macOS CLI (its only Apple asset is an
-      // xcframework), so this is WeftCut's own release asset: whisper-cli
+      // xcframework), so this is LMCut's own release asset: whisper-cli
       // v1.9.1 built from the pinned upstream commit by
       // scripts/build-whisper-cli-macos.mjs in the content-whisper-cli
       // workflow (ADR 0039). One static binary with Metal and its shader

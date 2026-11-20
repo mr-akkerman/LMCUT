@@ -88,7 +88,7 @@ jobs:
         run: node apps/desktop/scripts/release.mjs validate
       - name: Plan unpublished version
         id: plan
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'WeftCut/WeftCut'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'mr-akkerman/LMCUT'
         env:
           GH_TOKEN: ${{ github.token }}
         run: node apps/desktop/scripts/release.mjs plan
@@ -624,7 +624,7 @@ jobs:
 
   release:
     needs: [release-plan, e2e, checks, rust-test, compare]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'WeftCut/WeftCut' && needs.release-plan.outputs.publish == 'true'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'mr-akkerman/LMCUT' && needs.release-plan.outputs.publish == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     # Push runs are per commit (see the workflow's concurrency note), so two of
