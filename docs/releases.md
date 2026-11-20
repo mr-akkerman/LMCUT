@@ -51,6 +51,15 @@ Settings → Privacy & Security → Open Anyway, or run
 the runner, the ffmpeg sidecar and the from-source LGPL libraries are Apple
 Silicon.
 
+A machine that holds a Developer ID certificate can make a notarized build
+instead: `npm run package:mac:notarized --workspace apps/desktop`, with
+`LMCUT_MAC_IDENTITY` set to the certificate's full name and
+`LMCUT_NOTARY_PROFILE` to a `notarytool store-credentials` keychain profile.
+It signs with the hardened runtime, notarizes and staples the app, builds the
+DMG around it, then signs, notarizes and staples the DMG
+(`scripts/package-mac-notarized.mjs`). Gatekeeper opens that build without the
+steps above. CI still produces the ad-hoc build.
+
 macOS cannot self-update: Squirrel.Mac installs only a build satisfying the
 running app's designated requirement, and an ad-hoc requirement is that build's
 own code hash. Main passes no updater on darwin.

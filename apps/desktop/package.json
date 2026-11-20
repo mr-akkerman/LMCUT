@@ -47,6 +47,7 @@
     "ffmpeg:fetch": "node scripts/fetch-ffmpeg.mjs",
     "ffmpeg:fetch-lgpl": "node scripts/fetch-ffmpeg-lgpl.mjs",
     "package": "npm run napi:build && npm run napi:build:decode && npm run build && electron-builder --publish never",
+    "package:mac:notarized": "npm run napi:build && npm run napi:build:decode && npm run build && node scripts/package-mac-notarized.mjs",
     "pbt:stryker": "stryker run"
   },
   "dependencies": {
