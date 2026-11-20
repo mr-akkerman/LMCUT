@@ -57,6 +57,11 @@ own code hash. Main passes no updater on darwin.
 
 ## Auto-update (Windows and Linux)
 
+**Currently off in every build.** `UPDATES_ENABLED` in `src/main/updates.ts` is
+`false` until LMCut has a release feed of its own, so no build checks for,
+downloads or installs an update. The rest of this section describes what
+happens once it is set to `true`.
+
 Packaged Windows/Linux builds use electron-updater against the public GitHub
 Release feed (`src/main/updates.ts`); dev, E2E and macOS builds do not check.
 Prereleases and downgrades are off. Checks run 5 s after startup and every six

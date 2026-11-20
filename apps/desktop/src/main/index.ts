@@ -27,7 +27,7 @@ import { BITMAP_CANVAS_RUNTIME_SOURCE } from './motif/bitmapCanvasRuntime.js'
 import { builtinMotifs, getMotifSource, motifRevision } from './motif/authoring.js'
 import { loadAllKeys, setKey, clearKey } from './keys.js'
 import electronUpdater from 'electron-updater'
-import { createUpdates } from './updates.js'
+import { createUpdates, UPDATES_ENABLED } from './updates.js'
 import { createUpdateResume } from './updateResume.js'
 import { mediaMimeForExt } from './mediaMime.js'
 import { nodeAtomicWriteIo, writeFileAtomic } from './atomicWrite.js'
@@ -1413,7 +1413,7 @@ app.whenReady().then(async () => {
     clear: () => fs.rmSync(resumePath, { force: true }),
   })
   const resumeAfterUpdate = updateResume.take()
-  const updates = createUpdates(app.isPackaged && process.platform !== 'darwin'
+  const updates = createUpdates(UPDATES_ENABLED && app.isPackaged && process.platform !== 'darwin'
     ? electronUpdater.autoUpdater : null, {
     installOnQuit: () => appSettings.get().auto_install_updates_on_quit !== false,
     skippedVersion: () => appSettings.get().skipped_update_version,
