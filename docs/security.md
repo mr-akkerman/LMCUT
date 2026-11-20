@@ -1,6 +1,6 @@
 # Security
 
-WeftCut is a local-first desktop app. Every window runs with `contextIsolation`,
+LMCut is a local-first desktop app. Every window runs with `contextIsolation`,
 `sandbox`, `nodeIntegration: false` and `webSecurity` on. This doc records the
 Content-Security-Policy posture: two CSPs for two trust contexts, and the
 invariants that must hold when the app is extended.

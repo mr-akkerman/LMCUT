@@ -64,7 +64,7 @@ test('forced termination prompts on restart, exports the previous session and di
     expect(JSON.parse(strFromU8(files['previous/session.json']!)).closed).toBe(false)
     expect(strFromU8(files['previous/events.jsonl']!)).toContain('startup')
     await second.page.getByRole('button', { name: 'Open GitHub Issue' }).click()
-    await expect.poll(() => second.app.evaluate(() => (globalThis as any).__diagnosticIssueUrl)).toContain('github.com/WeftCut/WeftCut/issues/new?')
+    await expect.poll(() => second.app.evaluate(() => (globalThis as any).__diagnosticIssueUrl)).toContain('github.com/mr-akkerman/LMCUT/issues/new?')
     const issueUrl = new URL(await second.app.evaluate(() => (globalThis as any).__diagnosticIssueUrl))
     expect(issueUrl.searchParams.get('template')).toBe('bug_report.yml')
     expect(issueUrl.searchParams.get('what')).toContain('unclean-exit')

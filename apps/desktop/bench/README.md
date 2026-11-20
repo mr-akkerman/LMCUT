@@ -1,9 +1,9 @@
 # Agent bench
 
-Measures how far apart models land on the same WeftCut task: the **model gap**
+Measures how far apart models land on the same LMCut task: the **model gap**
 of [ADR 0046](../../../docs/adr/0046-agent-guidance-ships-as-one-skill.md).
 It launches the built app, sets a project up, hands it to an agent client
-(Claude Code first) with the WeftCut skill and MCP server, and records what the
+(Claude Code first) with the LMCut skill and MCP server, and records what the
 agent did from the app's side: before/after snapshots, the entity-level review
 diff (ADR 0116), the task's checklist, cost and turns.
 
@@ -35,7 +35,7 @@ npm run bench -- --task 'smoke-*' --model claude-opus-5-5,claude-haiku-5-5 --rep
 | `--budget-usd` | none | Spend cap per session, for clients that enforce one. |
 | `--host` | `local` | `local`, or `remote`: the app runs on another machine ([Remote app host](#remote-app-host)). `--remote <alias>` alone implies `remote`. |
 | `--remote` | `$WEFTCUT_BENCH_REMOTE` | ssh alias of the remote app host (`~/.ssh/config`). |
-| `--remote-repo` | `$WEFTCUT_BENCH_REMOTE_REPO` | The built WeftCut checkout on that host, e.g. `C:\Users\me\src\WeftCut`. |
+| `--remote-repo` | `$WEFTCUT_BENCH_REMOTE_REPO` | The built LMCut checkout on that host, e.g. `C:\Users\me\src\LMCut`. |
 | `--remote-node` | `$WEFTCUT_BENCH_REMOTE_NODE` | `node.exe` on the host for fixture fetching, when the default (fnm's v24.20.0, then `PATH`) is wrong. |
 | `--keep-remote` | off | Keep the run's directory on the host (profile, project, mirror) after teardown. |
 | `--rebuild-templates` | off | Set every project up from scratch and replace its template ([Project templates](#project-templates)). |
@@ -208,7 +208,7 @@ reached as an ssh alias:
 
 ```bash
 npm run bench -- --task explainer-tighten --model claude-haiku-5-5 \
-  --remote weftcut-pc --remote-repo 'C:\Users\me\src\WeftCut'
+  --remote weftcut-pc --remote-repo 'C:\Users\me\src\LMCut'
 ```
 
 Needs, on the host: OpenSSH server with sftp and **TCP forwarding allowed**
@@ -224,7 +224,7 @@ Everything the bench creates on the host is under `%USERPROFILE%\weftcut-bench\`
 `cache\`, `templates\`, `runs\<slug>\`). Per run:
 
 1. **Profile.** A fresh userData at `runs\<slug>\profile`, seeded from the
-   user's own profile (`%APPDATA%\WeftCut`), which is only read:
+   user's own profile (`%APPDATA%\LMCut`), which is only read:
    `speech_config.json`, `vlm_config.json` and `model_settings.json` are
    copied with every path naming that profile re-pointed at the run's; the
    model downloads (`data\downloads\…`) are hard-linked, never copied (same

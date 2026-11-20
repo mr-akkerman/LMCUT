@@ -61,7 +61,7 @@ BT.709/limited regardless of tags (ADR 0014).
 
 `new EyeDropper().open()` returns correct colors from any window, but the
 magnifier clips at the app window edge and the pick click activates the
-foreign window (electron#27980, #44916, #44917). WeftCut uses
+foreign window (electron#27980, #44916, #44917). LMCut uses
 `main/screenPick.ts` instead: freeze each display with desktopCapturer, then
 show overlay windows that own magnifier and input. Fractional DPI: use actual
 capture dimensions, request each display separately (a larger thumbnail can
@@ -160,7 +160,7 @@ its constructor, before the first `await`.
 
 ## Closing the last window quits, macOS included
 
-WeftCut is a single-window app (no File > New Window), and a windowless process
+LMCut is a single-window app (no File > New Window), and a windowless process
 would hold decode sessions, GPU textures and ffmpeg children with nothing to
 close; the MCP stdio shim already serves agents with the app closed. So
 `quitIfLastUserWindowClosed` has no platform branch. Restoring the quick-start

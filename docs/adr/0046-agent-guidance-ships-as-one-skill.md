@@ -8,8 +8,8 @@ Date: 2026-10-25
 
 ## Context
 
-WeftCut is an MCP server. Claude Code, Codex, Claude Desktop and others run
-their own loops and prompts, so WeftCut cannot inject a pipeline or own the
+LMCut is an MCP server. Claude Code, Codex, Claude Desktop and others run
+their own loops and prompts, so LMCut cannot inject a pipeline or own the
 loop. Tool descriptions carry per-call contracts; cross-tool process knowledge
 (checkpoint first, ask before taking over the UI, the Motif authoring loop)
 must reach an end user's agent, which has no repo. Nothing in MCP loads before

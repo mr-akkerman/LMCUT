@@ -31,7 +31,7 @@ function stubApi() {
     shell: { open },
     app: { versions },
     diagnostics: {
-      summary: vi.fn().mockResolvedValue({ available: true, environment: 'WeftCut 1.2.3 | linux x64', previousSession: null }),
+      summary: vi.fn().mockResolvedValue({ available: true, environment: 'LMCut 1.2.3 | linux x64', previousSession: null }),
     },
     updates: { check, status: vi.fn().mockResolvedValue({ phase: "current" }) },
   };
@@ -77,13 +77,13 @@ describe("HelpMenu", () => {
     expect(open).not.toHaveBeenCalled();
     const button = await screen.findByRole('button', { name: 'Open GitHub Issue' });
     expect(screen.getByRole("dialog", { name: "Report an Issue" })).toBeTruthy();
-    await screen.findByText('WeftCut 1.2.3 | linux x64');
+    await screen.findByText('LMCut 1.2.3 | linux x64');
     fireEvent.click(button);
     expect(open).toHaveBeenCalledOnce();
     const url = new URL(open.mock.calls[0]![0]);
     expect(url.origin + url.pathname).toBe(`${ISSUES_URL}/new`);
     expect(url.searchParams.get('template')).toBe('bug_report.yml');
-    expect(url.searchParams.get('version')).toContain('WeftCut 1.2.3');
+    expect(url.searchParams.get('version')).toContain('LMCut 1.2.3');
   });
 
   it("shows the main-process version identity in the About dialog", async () => {
@@ -91,7 +91,7 @@ describe("HelpMenu", () => {
     render(<HelpMenu />);
 
     fireEvent.click(screen.getByRole("button", { name: /Help/ }));
-    fireEvent.click(await screen.findByText("About WeftCut"));
+    fireEvent.click(await screen.findByText("About LMCut"));
 
     expect(versions).toHaveBeenCalledOnce();
     expect(await screen.findByText("Version 1.2.3")).toBeTruthy();
@@ -102,7 +102,7 @@ describe("HelpMenu", () => {
     render(<HelpMenu />);
 
     fireEvent.click(screen.getByRole("button", { name: /Help/ }));
-    fireEvent.click(await screen.findByText("About WeftCut"));
+    fireEvent.click(await screen.findByText("About LMCut"));
 
     fireEvent.click(await screen.findByRole("button", { name: "MIT" }));
     expect(open).toHaveBeenCalledWith(LICENSE_URL);

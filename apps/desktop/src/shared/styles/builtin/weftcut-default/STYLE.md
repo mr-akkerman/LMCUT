@@ -1,7 +1,7 @@
 ---
 name: weftcut-default
 version: 1
-description: WeftCut's neutral house style — legible white type over any footage, with the timings an editor would ship.
+description: LMCut's neutral house style — legible white type over any footage, with the timings an editor would ship.
 roles: []
 tokens:
   palette:
@@ -99,7 +99,7 @@ tokens:
     max_cue_s: 6
 ---
 
-# WeftCut default
+# LMCut default
 
 The style a project is in until its TASTE.md says otherwise. It is deliberately
 plain: white type in the app's bundled face, kept legible over any picture by

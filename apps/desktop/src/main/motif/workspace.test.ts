@@ -1,5 +1,5 @@
 import { afterEach, expect, it } from 'vitest';
-import { mkdtempSync, writeFileSync, readFileSync, rmSync, mkdirSync, symlinkSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, readFileSync, rmSync, mkdirSync, symlinkSync, unlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { UserMotifStore } from './store';
@@ -165,7 +165,9 @@ it('refuses escaping paths, path collisions and directory junctions before modif
     symlinkSync(outside, path.join(directory, 'linked'), 'junction');
     expect(workspace.read(draft.motif_id).diagnostic).toMatch(/symbolic/);
     expect(readFileSync(path.join(directory, 'index.html'), 'utf8')).toContain('one');
-    rmSync(path.join(directory, 'linked'));
+    // unlink, not rm: before Node 24.20 rmSync follows the link and refuses the
+    // directory behind it.
+    unlinkSync(path.join(directory, 'linked'));
 });
 it('keeps a capture navigation on the same resource bytes while the directory advances', () => {
     const store = new UserMotifStore(temp()), workspace = new MotifWorkspace(store, []), directory = folder();

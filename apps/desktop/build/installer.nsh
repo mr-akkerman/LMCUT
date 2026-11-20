@@ -1,4 +1,4 @@
-﻿; WeftCut custom NSIS include.
+﻿; LMCut custom NSIS include.
 ;
 ; electron-builder auto-detects ${buildResources}/installer.nsh (here build/) and
 ; !includes it into the generated installer — no `nsis.include` key is needed
@@ -108,10 +108,10 @@
 ;
 ; WHY: the assisted installer runs UNELEVATED for a per-user ("only for me")
 ; install — `RequestExecutionLevel user`. With allowToChangeInstallationDirectory
-; on, the directory page will happily accept C:\Program Files\WeftCut, but a
+; on, the directory page will happily accept C:\Program Files\LMCut, but a
 ; non-admin process cannot create or write there. The stock template performs NO
 ; writability check, so extraction fails half-way and the user is shown the
-; misleading "WeftCut cannot be closed" retry loop (extractAppPackage.nsh) and
+; misleading "LMCut cannot be closed" retry loop (extractAppPackage.nsh) and
 ; then a raw "cannot write file" error — with nothing pointing at the real cause
 ; (wrong install location for an unelevated install).
 ;

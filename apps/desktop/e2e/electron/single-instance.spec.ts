@@ -1,4 +1,4 @@
-// e2e gate: one WeftCut per profile (ADR 0163). A second launch on the same
+// e2e gate: one LMCut per profile (ADR 0163). A second launch on the same
 // userData exits and hands itself to the running instance; a launch on another
 // profile is a separate app. Raising and focusing the window are not asserted:
 // a CI display server without a window manager has neither.

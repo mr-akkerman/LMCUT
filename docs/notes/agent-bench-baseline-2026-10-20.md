@@ -1,6 +1,6 @@
 # Agent bench baseline — 2026-10-20
 
-What three Claude models did with WeftCut before any craft rule, recipe or
+What three Claude models did with LMCut before any craft rule, recipe or
 style existed. Source of the first `craft/` rules (`src/shared/craft.ts`).
 
 ## Environment
@@ -17,7 +17,7 @@ style existed. Source of the first `craft/` rules (`src/shared/craft.ts`).
 
 - **Intent checklist** (lenient, "was it done"): Opus 43/43, Sonnet 42/43,
   Haiku 38/43. Misses were engagement, not quality: Haiku never found the app
-  when the prompt did not name WeftCut (repeated), and once edited a **new**
+  when the prompt did not name LMCut (repeated), and once edited a **new**
   project instead of the open one.
 - **Look converges on tool defaults for every model**: system sans, white,
   bold, black outline, no plate, no entrance/exit (`intro`/`outro` null in all

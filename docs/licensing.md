@@ -1,6 +1,6 @@
 # Licensing
 
-WeftCut's own code — TypeScript, Rust, shaders, docs — is **MIT** (root
+LMCut's own code — TypeScript, Rust, shaders, docs — is **MIT** (root
 [`LICENSE`](../LICENSE)). Packaged installers additionally bundle third-party
 binaries with their own licenses; [`THIRD-PARTY-NOTICES.md`](../THIRD-PARTY-NOTICES.md)
 enumerates them. This doc explains why the MIT license holds next to GPL/LGPL
@@ -51,7 +51,7 @@ as `resources/native-decode/LIBVA-LICENSE.txt` and the pack gate asserts it.
 
 Binaries staged by `apps/desktop/scripts/fetch-ffmpeg.mjs` (gyan.dev on
 Windows, BtbN GPL on Linux, martin-riedl.de on macOS) and only ever executed
-as subprocesses. The GPL covers **those binaries**, not WeftCut — but
+as subprocesses. The GPL covers **those binaries**, not LMCut — but
 *distributing* them owes GPLv3 compliance for the binaries themselves:
 
 - **License text** — `resources/ffmpeg/LICENSE.txt` in the package (from the

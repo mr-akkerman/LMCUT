@@ -1298,7 +1298,7 @@ describe("DockWorkspaceAdapter", () => {
 });
 
 describe("dock drag classification", () => {
-  it("keeps OS Files and every WeftCut business payload outside docking", () => {
+  it("keeps OS Files and every LMCut business payload outside docking", () => {
     expect(isBusinessDockDrag({ types: ["Files"] })).toBe(true);
     expect(
       isBusinessDockDrag({ types: ["application/x-weftcut-media"] }),

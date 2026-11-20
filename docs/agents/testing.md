@@ -1,6 +1,6 @@
 # Testing
 
-Where WeftCut's tests live, why they're split the way they are, and how to run
+Where LMCut's tests live, why they're split the way they are, and how to run
 each layer. There is **no single `tests/` directory** — that's deliberate (see
 [Why not one directory](#why-not-one-directory)). Tests are grouped by *runner*,
 not scattered by neglect.

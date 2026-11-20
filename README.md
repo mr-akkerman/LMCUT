@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="apps/desktop/src/renderer/public/icons/icon.svg" alt="WeftCut" width="128" height="128" />
+  <img src="apps/desktop/src/renderer/public/icons/icon.svg" alt="LMCut" width="128" height="128" />
 </p>
 
-<h1 align="center">WeftCut</h1>
+<h1 align="center">LMCut</h1>
 
 <p align="center">
   <strong>The video editor your AI agent can drive like you do.</strong><br/>
@@ -12,18 +12,11 @@
 </p>
 
 > [!NOTE]
-> WeftCut is still under active development, so some features and UI/UX may change before v1.0.0. Join us to improve the project: start with the [contributing guide](CONTRIBUTING.md).
+> LMCut is under active development, so features and UI/UX may change before v1.0.0. It is an independent product based on the open-source [WeftCut](#origin-and-credits) editor.
 
 <p align="center">
-  <a href="https://github.com/WeftCut/WeftCut/releases/latest"><img alt="Download the latest release" src="https://img.shields.io/github/v/release/WeftCut/WeftCut?style=flat-square&label=Download&labelColor=475569&color=6696E6&logo=github&logoColor=white" /></a>
   <img alt="Runs on Windows, macOS and Linux" src="https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-5B7196?style=flat-square&labelColor=475569" />
-  <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/WeftCut/WeftCut?style=flat-square&label=License&labelColor=475569&color=5B7196" /></a>
-  <a href="https://discord.gg/SjsFCpzDe"><img alt="Join the WeftCut Discord community" src="https://img.shields.io/badge/Discord-Join%20the%20community-5865F2?style=flat-square&labelColor=475569&logo=discord&logoColor=white" /></a>
-  <a href="https://glama.ai/mcp/servers/WeftCut/WeftCut"><img alt="Glama MCP server score" src="https://glama.ai/mcp/servers/WeftCut/WeftCut/badges/score.svg" /></a>
-</p>
-
-<p align="center">
-  <a href="https://www.producthunt.com/products/weftcut?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-weftcut" target="_blank" rel="noopener noreferrer"><img alt="WeftCut - The open-source video editor your AI agent can drive | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1266067&amp;theme=neutral&amp;t=1791466936489" /></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-5B7196?style=flat-square&labelColor=475569" /></a>
 </p>
 
 ![An agent editing the timeline live over MCP](docs/assets/agent-edit.gif)
@@ -32,19 +25,13 @@
 lower third, trimming the B-roll, then undoing both — every edit lands in the UI
 in real time, every Agent action is recorded.</em></p>
 
-Most editors bolt AI on as a feature: a button that generates something, a sidebar that suggests a cut. WeftCut exposes the editor *itself* as a tool surface. A localhost MCP server publishes **all editing tools** — place, trim, split, restyle, keyframe, group, caption, mix, checkpoint — and whatever agent you already have open drives them. The intelligence lives outside the app: the installer bundles no model weights, and the local engines for speech and vision are an opt-in download when you want them.
+Most editors bolt AI on as a feature: a button that generates something, a sidebar that suggests a cut. LMCut exposes the editor *itself* as a tool surface. A localhost MCP server publishes **all editing tools** — place, trim, split, restyle, keyframe, group, caption, mix, checkpoint — and whatever agent you already have open drives them. The intelligence lives outside the app: the installer bundles no model weights, and the local engines for speech and vision are an opt-in download when you want them.
 
 None of that rides on a stripped-down editor. Everything an agent can reach, you can do by hand, in a full NLE: A/B-roll timeline, keyframes with a curve editor, effects, captions, a role-based audio mixer, and hardware-accelerated export.
 
 ## Quick start
 
-> [!NOTE]
->
-> We don't have a verified macOS installer yet, so allow it under **System Settings → Privacy & Security → Open Anyway**
-
-1. Download the installer for your platform from the [releases page](https://github.com/WeftCut/WeftCut/releases/latest).
-2. Install the app, open the settings panel, and copy the prompt that teaches your agent how to connect to WeftCut.
-3. Enjoy your work.
+There are no published installers yet. [Build from source](#build-from-source), open the settings panel, and copy the prompt that teaches your agent how to connect to LMCut.
 
 ## Hand your timeline to an agent
 
@@ -106,7 +93,7 @@ Lower thirds, countdowns, karaoke text and animated title cards are the obvious 
 
 ## A complete editor underneath
 
-![WeftCut editor](docs/assets/editor.png)
+![LMCut editor](docs/assets/editor.png)
 
 **Timeline** — A/B-roll rows with filmstrips and waveforms, frame-accurate SMPTE editing, ripple delete that closes the gap behind it, linked A/V that trims as one clip, cross-track groups, and nested compositions.
 <br/><sub>Agent: `move_layers` · `trim_layer` · `split_layer` · `shift_layers` · `create_link` · `create_group` · `move_layers_to_composition`</sub>
@@ -182,33 +169,17 @@ Start with **[architecture](docs/architecture.md)** for the system map, or **[MC
 - **[Status / log system](docs/status-log.md)** — the bottom-of-editor log bus.
 - **[Setup](docs/setup.md)** — per-OS toolchain prerequisites and first-run flow.
 - **[Licensing](docs/licensing.md)** — MIT app plus the two FFmpeg lanes and their build-time compliance gates.
-- **[v1 target](https://github.com/WeftCut/WeftCut/issues/11)** — release scope and open work, tracked as an issue: `docs/` describes what exists today.
 
 </details>
 
-## Community
+## Feedback
 
-Join the [WeftCut Discord community](https://discord.gg/SjsFCpzDe) to share feedback, discuss feature ideas, and get help. Please use [GitHub Issues](https://github.com/WeftCut/WeftCut/issues) for bug reports and feature requests so they can be tracked. Before opening a pull request, read the [contributing guide](CONTRIBUTING.md).
+Bug reports and feature requests go to [GitHub Issues](https://github.com/mr-akkerman/LMCUT/issues). Before opening a pull request, read the [contributing guide](CONTRIBUTING.md).
 
-## Maintainer
+## Origin and credits
 
-WeftCut is built and maintained by [UncleChair](https://github.com/UncleChair).
-
-It exists to speed up my own video work. I wanted an editor an agent could actually drive, and a timeline I could keep watching while it did — so the MCP surface is the part I use daily, not a demo bolted onto the side. Motifs came from the other half of that: the overlays I wanted were easier to *write* than to find, and an agent that can write a web page can write one for the shot in front of it.
-
-The project sits under the [WeftCut](https://github.com/WeftCut) organization so the name, domain and releases have a stable home, but it is a one-person project — issues and pull requests all reach me.
-
-## Star History
-
-<p align="center">
-  <a href="https://www.star-history.com/?repos=WeftCut%2FWeftCut&amp;type=date&amp;legend=top-left">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=WeftCut/WeftCut&amp;type=date&amp;theme=dark&amp;legend=top-left" />
-      <img alt="WeftCut GitHub Star History Chart" src="https://api.star-history.com/chart?repos=WeftCut/WeftCut&amp;type=date&amp;legend=top-left" />
-    </picture>
-  </a>
-</p>
+LMCut is developed by [mr-akkerman](https://github.com/mr-akkerman) as an independent product. It started from the source of WeftCut, an MIT-licensed editor created by UncleChair; the original copyright notice is kept in [LICENSE](LICENSE). LMCut is not affiliated with or endorsed by the WeftCut project.
 
 ## License
 
-WeftCut is licensed under the [MIT License](LICENSE). Packaged installers bundle FFmpeg binaries under their own licenses (LGPL shared libraries for in-process decode, GPL command-line tools run as a separate process) — see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) and [docs/licensing.md](docs/licensing.md) for the full model.
+LMCut is licensed under the [MIT License](LICENSE). Packaged installers bundle FFmpeg binaries under their own licenses (LGPL shared libraries for in-process decode, GPL command-line tools run as a separate process) — see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) and [docs/licensing.md](docs/licensing.md) for the full model.

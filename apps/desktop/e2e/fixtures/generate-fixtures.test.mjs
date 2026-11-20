@@ -194,7 +194,7 @@ test('the fixture matrix has one unique output name per entry', () => {
 })
 
 test('runFfmpeg preserves a spaced cwd and never invokes a shell', () => {
-  const outputDir = path.join(tmpdir(), 'WeftCut fixtures with spaces')
+  const outputDir = path.join(tmpdir(), 'LMCut fixtures with spaces')
   let invocation
 
   runFfmpeg(['-version'], {

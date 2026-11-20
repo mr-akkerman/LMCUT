@@ -7,7 +7,7 @@ The desktop version is plain SemVer. Bump it with
 package-lock.json together; a version edit in one package fails
 `release.mjs validate`. Native crate versions are independent.
 
-On a push to `main` in `WeftCut/WeftCut`, electron-ci's `release-plan` job
+On a push to `main` in `mr-akkerman/LMCUT`, electron-ci's `release-plan` job
 compares the version with published GitHub Releases; an unpublished, higher
 version is a release candidate. PRs, scheduled and manual runs never publish.
 A later main push retries an unpublished version whose build failed; a
@@ -32,10 +32,10 @@ higher patch; never replace installers under a published version.
 
 ## Asset names
 
-Assets carry OS and architecture, no version: `WeftCut-win-x64.exe`,
-`WeftCut-linux-x86_64.AppImage`, `WeftCut-linux-amd64.deb`,
-`WeftCut-mac-arm64.dmg`. So
-`https://github.com/WeftCut/WeftCut/releases/latest/download/<asset>` is a
+Assets carry OS and architecture, no version: `LMCut-win-x64.exe`,
+`LMCut-linux-x86_64.AppImage`, `LMCut-linux-amd64.deb`,
+`LMCut-mac-arm64.dmg`. So
+`https://github.com/mr-akkerman/LMCUT/releases/latest/download/<asset>` is a
 permanent link to the current build, and `releases/download/v<version>/<asset>`
 addresses one build. electron-updater finds the previous blockmap by swapping
 the version in the tag segment, so differential Windows updates still work.
@@ -56,6 +56,11 @@ running app's designated requirement, and an ad-hoc requirement is that build's
 own code hash. Main passes no updater on darwin.
 
 ## Auto-update (Windows and Linux)
+
+**Currently off in every build.** `UPDATES_ENABLED` in `src/main/updates.ts` is
+`false` until LMCut has a release feed of its own, so no build checks for,
+downloads or installs an update. The rest of this section describes what
+happens once it is set to `true`.
 
 Packaged Windows/Linux builds use electron-updater against the public GitHub
 Release feed (`src/main/updates.ts`); dev, E2E and macOS builds do not check.
@@ -89,7 +94,7 @@ not atomic, and shortcuts keep targeting the installed exe.
 Taskbar icon and grouping come from the AppUserModelID stamped onto the Start
 Menu and Desktop shortcuts. The installed app's AUMID in
 `src/main/appIdentity.ts` must equal electron-builder's `appId`
-(`dev.weftcut.desktop`; a unit test pins them) and must stay stable across
+(`dev.lmcut.desktop`; a unit test pins them) and must stay stable across
 releases. The stock installer re-stamps a shortcut only when it recreates or
 renames it, so an in-place update could leave a stale identity and a blank
 taskbar icon; `build/installer.nsh` re-asserts it on every install and update.

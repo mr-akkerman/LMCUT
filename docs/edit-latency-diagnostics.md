@@ -10,7 +10,7 @@ After `npm run build:e2e`, from the repository root:
 
 ```powershell
 node apps/desktop/e2e/scripts/profile-marker-drag.mjs `
-  --project 'C:\path\to\project' --user-data "$env:APPDATA\WeftCut" `
+  --project 'C:\path\to\project' --user-data "$env:APPDATA\LMCut" `
   --work-dir 'tmp/marker-drag-diagnostics' --label baseline --samples 6 `
   --cpu-profile --chrome-trace
 ```

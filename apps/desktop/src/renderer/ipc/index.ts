@@ -277,7 +277,7 @@ export interface MediaSummary {
   /// missing item render placeholders.
   available: boolean;
   /// The file is there but holds other bytes than this item records (changed
-  /// outside WeftCut); `available` is false too, so it is treated as missing.
+  /// outside LMCut); `available` is false too, so it is treated as missing.
   changed?: boolean;
   /// Where preview/export decode from + proxy readiness. See decodeRoute.ts.
   decode_route: DecodeRoute;
@@ -2061,7 +2061,7 @@ export async function resetMcpToken(): Promise<string> {
 
 /// Re-run the startup refresh of `<userData>/skills` and return what it found.
 /// The recovery behind the Agent tab's "try again": every fault a packaged user
-/// can hit is one something outside WeftCut can clear, so re-checking must not
+/// can hit is one something outside LMCut can clear, so re-checking must not
 /// cost an app restart.
 export async function reinstallSkills(): Promise<SkillsInstallView> {
   return (await window.api.mcp.reinstallSkills()) as SkillsInstallView;

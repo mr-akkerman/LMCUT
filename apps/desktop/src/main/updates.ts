@@ -8,6 +8,11 @@ type Updater = Pick<AppUpdater,
   'on' | 'checkForUpdates' | 'downloadUpdate' | 'autoDownload' | 'autoInstallOnAppQuit' | 'disableWebInstaller' |
   'allowPrerelease' | 'allowDowngrade' | 'logger' | 'quitAndInstall'>
 
+/// Self-update is off in every build until LMCut publishes releases of its own
+/// to check against. Flip this once the release feed exists; the darwin and
+/// unpackaged exclusions at the call site stay either way.
+export const UPDATES_ENABLED: boolean = false
+
 export function createUpdates(updater: Updater | null, lifecycle?: {
   installOnQuit: () => boolean
   skippedVersion?: () => string | undefined

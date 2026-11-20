@@ -1,4 +1,4 @@
-/// The Windows identity of a WeftCut process: the AppUserModelID (taskbar icon,
+/// The Windows identity of an LMCut process: the AppUserModelID (taskbar icon,
 /// window grouping, notification settings) and the toast activator CLSID (the
 /// COM class Windows calls when a notification is clicked). See ADR 0163.
 export interface WindowsAppIdentity {
@@ -16,8 +16,8 @@ export interface WindowsAppIdentity {
 /// Windows links a window to its shortcut only when the two match (otherwise a
 /// blank taskbar icon). appIdentity.test.ts pins them.
 export const PACKAGED_WINDOWS_IDENTITY: WindowsAppIdentity = {
-  appUserModelId: 'dev.weftcut.desktop',
-  toastActivatorClsid: '{F11EC90E-A84C-4AF9-B399-DE90E30282A2}',
+  appUserModelId: 'dev.lmcut.desktop',
+  toastActivatorClsid: '{1A9AFA21-45F4-44C4-8FE4-54776670BFFC}',
 }
 
 /// An unpackaged run's identity. It differs from the installed app's in both
@@ -25,8 +25,8 @@ export const PACKAGED_WINDOWS_IDENTITY: WindowsAppIdentity = {
 /// bare electron.exe, and two shortcuts claiming one AUMID let Windows route
 /// the installed app's notification clicks through the dev one.
 export const DEV_WINDOWS_IDENTITY: WindowsAppIdentity = {
-  appUserModelId: 'dev.weftcut.desktop.dev',
-  toastActivatorClsid: '{D0AB06A7-435F-4AB3-8FAE-4E9C6FA99FF3}',
+  appUserModelId: 'dev.lmcut.desktop.dev',
+  toastActivatorClsid: '{47FADE76-C89D-412C-A1FA-CD03C771ADE2}',
 }
 
 export function windowsAppIdentity(packaged: boolean): WindowsAppIdentity {

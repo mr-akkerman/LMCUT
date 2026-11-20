@@ -3,8 +3,8 @@ import type { ShortcutDetails } from 'electron'
 import { DEV_WINDOWS_IDENTITY, PACKAGED_WINDOWS_IDENTITY } from './appIdentity'
 import { installWindowsNotifications, type WindowsNotificationHost } from './windowsNotifications'
 
-const LNK = 'C:\\Users\\u\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\WeftCut.lnk'
-const EXE = 'C:\\Users\\u\\AppData\\Local\\Programs\\WeftCut\\WeftCut.exe'
+const LNK = 'C:\\Users\\u\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\LMCut.lnk'
+const EXE = 'C:\\Users\\u\\AppData\\Local\\Programs\\LMCut\\LMCut.exe'
 
 /// A host that records every call in order and keeps one shortcut on disk.
 function fakeHost(shortcut: ShortcutDetails | null, opts: { writeFails?: boolean } = {}) {
@@ -38,11 +38,11 @@ const packaged = (onActivation = () => {}) => ({ identity: PACKAGED_WINDOWS_IDEN
 
 describe('installWindowsNotifications', () => {
   it('stamps the installer shortcut with the app CLSID before Electron registers the activator', () => {
-    const f = fakeHost({ target: EXE, description: 'WeftCut video editor desktop app' })
+    const f = fakeHost({ target: EXE, description: 'LMCut video editor desktop app' })
     expect(installWindowsNotifications(f.host, packaged())).toBe('stamped')
     expect(f.log.indexOf(`update ${PACKAGED_WINDOWS_IDENTITY.toastActivatorClsid}`)).toBeLessThan(f.log.indexOf('registerActivator'))
     expect(f.log.indexOf(`clsid ${PACKAGED_WINDOWS_IDENTITY.toastActivatorClsid}`)).toBeLessThan(f.log.indexOf('registerActivator'))
-    expect(f.shortcut()).toMatchObject({ target: EXE, description: 'WeftCut video editor desktop app', toastActivatorClsid: PACKAGED_WINDOWS_IDENTITY.toastActivatorClsid })
+    expect(f.shortcut()).toMatchObject({ target: EXE, description: 'LMCut video editor desktop app', toastActivatorClsid: PACKAGED_WINDOWS_IDENTITY.toastActivatorClsid })
   })
 
   it('replaces a CLSID Electron generated on an earlier run', () => {

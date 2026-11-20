@@ -17,7 +17,7 @@ Date: 2026-07-25
   1/80-frame subframe does not fix this: at 30000/1001 a subframe is 20.02
   samples, so it re-creates a second grid rounded again at render.
 - Drop-frame timecode relabels microseconds that are already correct; its only
-  consumers are interchange formats (EDL/AAF/OTIO/FCPXML) WeftCut does not
+  consumers are interchange formats (EDL/AAF/OTIO/FCPXML) LMCut does not
   write.
 
 ## Decision

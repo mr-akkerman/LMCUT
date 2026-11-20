@@ -8,10 +8,10 @@ import { stampSkillVersion, REQUIRED_DOCS, REQUIRED_ASSETS, REQUIRED_LAYERS } fr
 
 const SKILL = `---
 name: weftcut
-description: Drive the WeftCut video editor over its MCP tools.
+description: Drive the LMCut video editor over its MCP tools.
 ---
 
-# Driving WeftCut
+# Driving LMCut
 `
 
 /// A packed app whose <resources>/skills holds what the caller asks for.

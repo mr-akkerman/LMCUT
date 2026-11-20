@@ -9,7 +9,7 @@ protocol.registerSchemesAsPrivileged([
 ])
 
 if (process.argv.includes('--weftcut-calibration')) await import('./calibration-host')
-// One WeftCut per profile (ADR 0163). Electron keys the lock on the userData
+// One LMCut per profile (ADR 0163). Electron keys the lock on the userData
 // directory, so runs with their own --user-data-dir (e2e, calibration, bench)
 // stay independent. A second launch quits before it opens diagnostics, the
 // backend or the MCP host; the first instance raises its window on

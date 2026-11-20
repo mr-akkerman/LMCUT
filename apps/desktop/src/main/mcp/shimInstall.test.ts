@@ -51,15 +51,15 @@ describe('installShim', () => {
 describe('stdioConnectConfig', () => {
   it('emits exe + shim + discovery env, preferring $APPIMAGE as the command', () => {
     expect(
-      stdioConnectConfig({ execPath: 'C:\\App\\WeftCut.exe', appImage: undefined, shimPath: 'C:\\ud\\cli\\s.cjs', userDataDir: 'C:\\ud' }),
+      stdioConnectConfig({ execPath: 'C:\\App\\LMCut.exe', appImage: undefined, shimPath: 'C:\\ud\\cli\\s.cjs', userDataDir: 'C:\\ud' }),
     ).toEqual({
-      command: 'C:\\App\\WeftCut.exe',
+      command: 'C:\\App\\LMCut.exe',
       args: ['C:\\ud\\cli\\s.cjs'],
       env: { ELECTRON_RUN_AS_NODE: '1', WEFTCUT_USERDATA: 'C:\\ud' },
     })
     expect(
-      stdioConnectConfig({ execPath: '/tmp/.mount/weftcut', appImage: '/apps/WeftCut.AppImage', shimPath: '/ud/cli/s.cjs', userDataDir: '/ud' })
+      stdioConnectConfig({ execPath: '/tmp/.mount/weftcut', appImage: '/apps/LMCut.AppImage', shimPath: '/ud/cli/s.cjs', userDataDir: '/ud' })
         .command,
-    ).toBe('/apps/WeftCut.AppImage')
+    ).toBe('/apps/LMCut.AppImage')
   })
 })

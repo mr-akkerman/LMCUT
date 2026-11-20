@@ -102,7 +102,7 @@ export interface DockWorkspaceController {
   toggleMaximize(id?: PanelId): void;
   restoreMaximizedPanel(): void;
   resetWorkspace(): void;
-  /** Capture the live Dock Tree as a validated, versioned WeftCut layout
+  /** Capture the live Dock Tree as a validated, versioned LMCut layout
    *  snapshot. Transient maximize/focus/hover state is excluded. */
   serialize(): WeftCutLayout;
   /** Replace the live layout from a normalized snapshot, reusing open Panel
@@ -140,7 +140,7 @@ function setSizeOnAxis(
   else group.api.setSize({ height: value });
 }
 
-/** True only for OS Files or WeftCut business drags, never Dockview drags. */
+/** True only for OS Files or LMCut business drags, never Dockview drags. */
 export function isBusinessDockDrag(
   dataTransfer: Pick<DataTransfer, "types"> | null | undefined,
 ): boolean {

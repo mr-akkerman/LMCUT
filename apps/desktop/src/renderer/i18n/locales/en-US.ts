@@ -73,7 +73,7 @@ const enUS = {
     "decode_heading": "Standard engine preview decoding",
     "encode_heading": "FFmpeg export encoding",
     "decode_scope": "Preview testing covers H.264, HEVC and VP9 at 8-bit. Linux preview copies frames through system memory. Export decoding currently uses software.",
-    "memory_scope": "Device memory includes all applications. It is measured separately from WeftCut resource use.",
+    "memory_scope": "Device memory includes all applications. It is measured separately from LMCut resource use.",
     "sampled_at": "Last tested: {{time}}",
     "stale": "Showing the last hardware reading; current information is unavailable.",
     "probe_details": "Technical details",
@@ -290,9 +290,9 @@ const enUS = {
     conversion_note:'Only the chosen range is retained; outside it the result holds. Editable curves use sparse keys and keep constant axes static. Frame baking retains regularly spaced keys and adds more when needed. Error is measured at frames, quarter-frames and key boundaries, not guaranteed continuously. Instantaneous position jumps are refused.',
   },
   app: {
-    title: "WeftCut",
+    title: "LMCut",
     core_status: "core: {{status}}",
-    window_title: "WeftCut — {{name}}",
+    window_title: "LMCut — {{name}}",
   },
   splash: {
     starting: "Starting system checks…",
@@ -390,7 +390,7 @@ const enUS = {
     subtitle: "Pick a project to open, or create a new one.",
     new_project: "New project",
     open_project: "Open project…",
-    open_dialog_title: "Open WeftCut project folder",
+    open_dialog_title: "Open LMCut project folder",
     recent_heading: "Recent",
     recent_loading: "Loading…",
     recent_empty: "No recent projects yet.",
@@ -400,14 +400,14 @@ const enUS = {
     recent_open_failed: "Couldn't open project: {{detail}}",
     recents_load_failed: "Couldn't load the recent projects list: {{detail}}",
     not_project_folder:
-      "That folder isn't a WeftCut project. Pick a folder created by WeftCut, or start a new project.",
+      "That folder isn't an LMCut project. Pick a folder created by LMCut, or start a new project.",
     project_folder_missing:
       "That project folder no longer exists — it may have been moved, renamed, or deleted. It was removed from the recent list.",
-    // States the mismatch and stops. "Update WeftCut" is a guess that happens to
+    // States the mismatch and stops. "Update LMCut" is a guess that happens to
     // be wrong for the file this fires on most often — a project left behind by
     // a different build of this same repo.
     project_schema_too_new:
-      "That project was written by a different build of WeftCut (project format v{{found}}); this build reads v{{supported}}.",
+      "That project was written by a different build of LMCut (project format v{{found}}); this build reads v{{supported}}.",
     project_schema_unreadable:
       "That folder's project.json declares no project format version this build recognizes, so it can't be opened.",
     project_file_unreadable:
@@ -520,7 +520,7 @@ const enUS = {
   diagnostics: {
     title: 'Report an Issue',
     previous_title: 'The previous session did not exit normally',
-    previous_description: 'WeftCut found an unfinished session or a process failure. This can also happen after a forced quit or power loss. You can help us investigate by reporting it on GitHub.',
+    previous_description: 'LMCut found an unfinished session or a process failure. This can also happen after a forced quit or power loss. You can help us investigate by reporting it on GitHub.',
     description: 'Export a diagnostic ZIP, review its contents, then attach it to a GitHub issue. Opening GitHub prepares a draft; you choose when to submit it.',
     privacy: 'Includes app and system versions, CPU / memory / GPU information, recent resource samples and redacted logs. No project files or media are included. Error text may still contain private information. GitHub issues and attachments are public; nothing is uploaded automatically.',
     export: 'Export Diagnostic Bundle…',
@@ -534,10 +534,10 @@ const enUS = {
   help: {
     check_updates: "Check for Updates…",
     report_issue: "Report an Issue…",
-    about: "About WeftCut",
+    about: "About LMCut",
     version: "Version {{version}}",
-    developed_by: "Developed by UncleChair",
-    license_mit: "License: WeftCut is <mit>MIT</mit>-licensed.",
+    developed_by: "Developed by mr-akkerman. Based on WeftCut by UncleChair.",
+    license_mit: "License: LMCut is <mit>MIT</mit>-licensed.",
     third_party:
       "Third-party components have their own licenses: <notices>THIRD-PARTY-NOTICES.md</notices>.",
     copy_version: "Copy Version Info",
@@ -1122,8 +1122,8 @@ const enUS = {
     close: "Close",
   },
   dialogs: {
-    save_title: "Save WeftCut project",
-    project_filter: "WeftCut project",
+    save_title: "Save LMCut project",
+    project_filter: "LMCut project",
     save_default_name: "untitled.vproj",
     import_title: "Import media",
     media_filter: "Media files",
@@ -1154,7 +1154,7 @@ const enUS = {
     missing: "Missing",
     missing_hint: "Source file not found: {{path}}",
     changed: "Changed",
-    changed_hint: "{{path}} was changed outside WeftCut and no longer holds this media. Import the original file again to restore it.",
+    changed_hint: "{{path}} was changed outside LMCut and no longer holds this media. Import the original file again to restore it.",
     proxy_pending: "Preparing…",
     proxy_pending_hint: "Preview is being prepared…",
     optimizing: "Optimizing in background",
@@ -1933,7 +1933,7 @@ const enUS = {
     reveal_mac: "Reveal in Finder",
     reveal_linux: "Show in folder",
     reveal_hint: "Open the folder containing the exported file.",
-    render_play_title: "WeftCut — Render & Play",
+    render_play_title: "LMCut — Render & Play",
     notify_done_title: "Export finished",
     notify_done_body: "Saved to {{path}}",
     notify_failed_title: "Export failed",
@@ -2096,12 +2096,12 @@ const enUS = {
     },
     agent_skill_unavailable: {
       title: "Agent Skill missing",
-      body: "The Skill that teaches a connected agent how to drive WeftCut did not install, so there is nothing to hand to your agent. Reinstall the app to restore it.",
+      body: "The Skill that teaches a connected agent how to drive LMCut did not install, so there is nothing to hand to your agent. Reinstall the app to restore it.",
       action: "Open agent settings",
     },
     agent_skill_stale: {
       title: "Agent Skill not up to date",
-      body: "WeftCut could not refresh its agent Skill, so the copy on offer is one an earlier version left behind. An agent using it may call tools this version no longer has.",
+      body: "LMCut could not refresh its agent Skill, so the copy on offer is one an earlier version left behind. An agent using it may call tools this version no longer has.",
       action: "Open agent settings",
     },
   },
@@ -2123,7 +2123,7 @@ const enUS = {
   },
   connect: {
     blurb:
-      "Connect an external agent to WeftCut's local MCP server so it can read and edit your project directly.",
+      "Connect an external agent to LMCut's local MCP server so it can read and edit your project directly.",
     starting: "MCP server starting…",
     copy: "Copy config",
     copied: "Copied!",
@@ -2131,26 +2131,26 @@ const enUS = {
     prompt_copied: "Prompt copied!",
     prompt_heading: "Let your agent set itself up",
     prompt_blurb:
-      "For agents that support MCP: paste the prompt into the chat and it configures the MCP connection and copies the Skill. Paste it again after each WeftCut upgrade: the agent's copy does not update itself.",
+      "For agents that support MCP: paste the prompt into the chat and it configures the MCP connection and copies the Skill. Paste it again after each LMCut upgrade: the agent's copy does not update itself.",
     manual_heading: "Prove you're human",
-    skill_path_heading: "WeftCut's Skill copy",
+    skill_path_heading: "LMCut's Skill copy",
     skill_copy_note:
-      "Agents read their own copy of this folder, which does not update itself: replace it after each WeftCut upgrade.",
+      "Agents read their own copy of this folder, which does not update itself: replace it after each LMCut upgrade.",
     skill_path_unavailable:
       "No Skill folder to open — see “Let your agent set itself up” above.",
     skill_stale:
-      "Showing the copy an earlier launch left behind, which may be older than this version of WeftCut.",
+      "Showing the copy an earlier launch left behind, which may be older than this version of LMCut.",
     skill_retry: "Try again",
     skill_retrying: "Installing…",
     skill_fault: {
       not_built:
         "This development build has no Skill staged yet. Run “npm run build:skills” and restart.",
       bundle_missing:
-        "No Skill shipped with this installation of WeftCut. Reinstall the app to restore it.",
+        "No Skill shipped with this installation of LMCut. Reinstall the app to restore it.",
       incomplete:
-        "The Skill that shipped with WeftCut is incomplete. Reinstall the app to restore it.",
+        "The Skill that shipped with LMCut is incomplete. Reinstall the app to restore it.",
       copy_failed:
-        "WeftCut could not write the Skill into its user-data folder. Check free disk space and the folder's permissions, then restart.",
+        "LMCut could not write the Skill into its user-data folder. Check free disk space and the folder's permissions, then restart.",
     },
     copy_path: "Copy path",
     browse: "Browse…",
@@ -2159,7 +2159,7 @@ const enUS = {
     // platform can — see main/openPath.ts).
     open_location: "Open file location",
     agent_prompt: [
-      "Configure the WeftCut MCP server for me. Make the configuration change directly; do not just describe the steps.",
+      "Configure the LMCut MCP server for me. Make the configuration change directly; do not just describe the steps.",
       "",
       "Connection details:",
       "- Server name: weftcut",
@@ -2176,7 +2176,7 @@ const enUS = {
       "- Report which file you changed and whether the configuration is valid.",
     ].join("\n"),
     agent_prompt_stdio: [
-      "Configure the WeftCut MCP server for me. Make the configuration change directly; do not just describe the steps.",
+      "Configure the LMCut MCP server for me. Make the configuration change directly; do not just describe the steps.",
       "",
       "Connection details:",
       "- Server name: weftcut",
@@ -2197,11 +2197,11 @@ const enUS = {
     // applies. It stands on its own so the message still reads when there is no
     // staged Skill folder to hand over and this half is left out.
     agent_prompt_skill: [
-      "Then install the WeftCut Skill — the usage guidance that ships with the app.",
+      "Then install the LMCut Skill — the usage guidance that ships with the app.",
       "",
       '- Copy the folder "{{folder}}" into your own skills directory, keeping the folder name weftcut. For Claude Code that is ~/.claude/skills/weftcut.',
-      "- Delete any copy already there first; it belongs to another version of WeftCut.",
-      "- Read the Skill once it is in place, and follow it whenever you work on a WeftCut project.",
+      "- Delete any copy already there first; it belongs to another version of LMCut.",
+      "- Read the Skill once it is in place, and follow it whenever you work on an LMCut project.",
       "- Report where you installed it.",
     ].join("\n"),
     reveal: "Reveal token",
@@ -2215,7 +2215,7 @@ const enUS = {
       "MCP requests must carry the token, and the server binds to local use only. The token is stored in mcp_auth.json — if it leaks, use Refresh token to rotate it.",
     snippets_heading: "Client config snippets",
     stdio_note:
-      "This configuration stays valid long-term: app restarts, port changes and token changes require no edits. Agents can also connect while WeftCut is closed, and launch it directly.",
+      "This configuration stays valid long-term: app restarts, port changes and token changes require no edits. Agents can also connect while LMCut is closed, and launch it directly.",
     http_heading: "HTTP direct (advanced)",
     http_note:
       "Connects directly to the running app. The connection drops once the app closes, and the configuration becomes invalid when the port or token changes. Unless your client does not support stdio, use the configuration above.",
@@ -2258,7 +2258,7 @@ const enUS = {
       '4k-wide': '4K · Relaxed',
     },
     default_text_font: "Default text font",
-    default_text_font_hint: "The default font when using text. Install fonts through your operating system, then restart WeftCut to update the list.",
+    default_text_font_hint: "The default font when using text. Install fonts through your operating system, then restart LMCut to update the list.",
     heading: "Settings",
     cat_general: "General",
     cat_project: "Project",
@@ -2271,7 +2271,7 @@ const enUS = {
     preferences_heading: "Basics",
     reopen_on_launch: "Auto-open last project",
     reopen_on_launch_hint:
-      "When enabled, WeftCut skips the start screen and auto-opens the last used project.",
+      "When enabled, LMCut skips the start screen and auto-opens the last used project.",
     canvas_heading: "Canvas",
     canvas_blurb:
       "This project's editing and preview size, and its timeline frame rate.",
@@ -2398,7 +2398,7 @@ const enUS = {
       "This clip's format isn't supported by the Lite engine, and the Standard engine isn't installed.",
     data_location_heading: "Data location",
     data_location_blurb:
-      "Where WeftCut keeps its large managed files. Your Motifs, partial caches, and downloaded assets will be stored here.",
+      "Where LMCut keeps its large managed files. Your Motifs, partial caches, and downloaded assets will be stored here.",
     data_location_current_label: "Current folder",
     data_location_fallback:
       "Fallback — the folder you chose was unavailable, so the default is in use.",
@@ -2410,15 +2410,15 @@ const enUS = {
     data_location_phase_done: "Finishing…",
     data_location_progress_count: "{{copied}} / {{total}} files",
     data_location_success_copy:
-      "Your data was copied to {{path}}. Restart WeftCut to start using the new location.",
+      "Your data was copied to {{path}}. Restart LMCut to start using the new location.",
     data_location_success_adopt:
-      "WeftCut will use the existing data folder at {{path}}. Restart to apply.",
+      "LMCut will use the existing data folder at {{path}}. Restart to apply.",
     data_location_restart: "Restart to apply",
     data_location_error:
       "Couldn't change the data folder: {{message}} Your data was left unchanged.",
     data_location_cleanup_title: "Delete old data copy?",
     data_location_cleanup_body:
-      "WeftCut is now running on the new location. The previous copy at {{path}} is no longer used — delete it to free up space, or keep it as a backup.",
+      "LMCut is now running on the new location. The previous copy at {{path}} is no longer used — delete it to free up space, or keep it as a backup.",
     data_location_cleanup_keep: "Keep",
     data_location_cleanup_delete: "Delete old copy",
     data_location_cleanup_deleting: "Deleting…",

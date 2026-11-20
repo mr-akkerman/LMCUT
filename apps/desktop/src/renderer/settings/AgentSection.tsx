@@ -31,7 +31,7 @@ const MASKED_TOKEN = "••••••••••••••••";
 type ClientId = "codex" | "claude" | "cursor" | "generic";
 const CLIENTS: readonly ClientId[] = ["codex", "claude", "cursor", "generic"];
 
-/// The stdio launch triple for the shim. `command` is the WeftCut binary
+/// The stdio launch triple for the shim. `command` is the LMCut binary
 /// acting as the Node runtime (ELECTRON_RUN_AS_NODE) — or the .AppImage file
 /// on Linux, where the mounted binary path dies with the session.
 interface StdioCfg {
@@ -463,7 +463,7 @@ export function AgentSection() {
           {t(`connect.skill_fault.${skills.fault}`)}
         </p>
         {/* Offered for every fault, not just the transient-looking ones: each
-            is cleared by something outside WeftCut (a freed disk, a restored
+            is cleared by something outside LMCut (a freed disk, a restored
             quarantine, a repaired install), and only re-running the install
             can tell whether that has happened yet. */}
         <Button

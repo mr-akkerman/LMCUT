@@ -1,6 +1,6 @@
-# WeftCut
+# LMCut
 
-WeftCut is an Electron + napi-rs desktop video editor. This file is the
+LMCut is an Electron + napi-rs desktop video editor. This file is the
 project's glossary: the canonical word for each domain concept, what it means,
 and the words to avoid. Data shapes live in [`docs/data-model.md`](docs/data-model.md),
 behavior in [`docs/features.md`](docs/features.md), decisions in [`docs/adr/`](docs/adr/).

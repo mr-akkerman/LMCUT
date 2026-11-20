@@ -498,7 +498,7 @@ describe("DockWorkspace React integration", () => {
       </StrictMode>,
     );
 
-    // StrictMode intentionally repeats effect setup, while the WeftCut
+    // StrictMode intentionally repeats effect setup, while the LMCut
     // adapter recognizes the same API and leaves registration idempotent.
     expect(dockHarness.readyCalls).toBe(2);
     expect(dock.addPanel).toHaveBeenCalledTimes(8);

@@ -1,6 +1,6 @@
 # Setup
 
-Building WeftCut needs Node 24+ (`.nvmrc` pins the CI version), the Rust
+Building LMCut needs Node 24+ (`.nvmrc` pins the CI version), the Rust
 toolchain, and per-OS native build tools for the two napi addons
 (`@weftcut/core`, `@weftcut/native-decode`). Electron bundles its own Chromium;
 there is no webview runtime to install.

@@ -76,7 +76,7 @@ export const GL_SWITCHES: readonly string[] = process.env.WEFTCUT_E2E_GL
 /// os.tmpdir()) for EVERY launch and registers the app below; the driver
 /// removes the dir once the app's close() resolves, and a process-exit sweep
 /// kills + cleans up whatever a spec forgot to close. Specs are therefore
-/// isolated from each other and from the developer's real WeftCut profile —
+/// isolated from each other and from the developer's real LMCut profile —
 /// layout mutations and autosaves can no longer leak through the OS-default
 /// userData, and the suite is safe to run with parallel workers.
 ///

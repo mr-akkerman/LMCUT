@@ -1,6 +1,6 @@
 # Architecture
 
-WeftCut is an Electron desktop video editor with a Rust core loaded as a napi
+LMCut is an Electron desktop video editor with a Rust core loaded as a napi
 addon. The Electron **main** process (TypeScript) owns the authoritative
 project, persistence, config stores and the MCP host. The Rust core owns native
 runtime services (derivative jobs, caches, ffmpeg, the export audio mixer and

@@ -1,6 +1,6 @@
 # MCP Server & Agent UX
 
-WeftCut is an MCP server. External agents (Claude Code, Claude Desktop, Codex,
+LMCut is an MCP server. External agents (Claude Code, Claude Desktop, Codex,
 Cursor, custom clients) edit the open project through a structured tool
 surface, over the **`weftcut-mcp` stdio shim** (recommended) or **HTTP-direct**.
 Per-tool arguments, return shapes and refusals live in the advertised catalog
@@ -21,11 +21,11 @@ the agent-facing UX. Agent guidance ships as one skill (ADR 0046).
   tables (`MCP_TOOL_DEFS`, `MOTIF_TOOL_DEFS`, the export tools), deduplicated by
   name with TS winning (`main/mcp/mcpCatalog.ts`).
 - **The stdio shim** (`src/cli/`, built by `scripts/build-cli.mjs`) runs under
-  `ELECTRON_RUN_AS_NODE` — the WeftCut binary is its Node runtime. The app
+  `ELECTRON_RUN_AS_NODE` — the LMCut binary is its Node runtime. The app
   copies it to `<userData>/cli/weftcut-mcp.cjs` at every startup; client
   configs point at that copy, the only path stable across upgrades on all three
   OSes (an AppImage mounts at a random point). `<userData>` is
-  `<appData>/WeftCut`, named from package.json's `productName`, which must stay
+  `<appData>/LMCut`, named from package.json's `productName`, which must stay
   set: electron-builder's `productName` is not written into the packaged
   package.json. The shim re-reads `mcp_auth.json` on every (re)connect, so port
   re-picks and token rotations self-heal and its config carries no URL or token.
@@ -649,7 +649,7 @@ kind the position is the transform anchor's location (ADR 0112).
   unlike the timeline-absolute `t_us` of `set_keyframe` / `set_param_track`;
   the answer echoes them the same way. Keys need only
   `{local_t_us, value}`; nodes need only `{ point }` (handles default to zero,
-  `segment` to `"Line"`, `tangent_mode` to `"Corner"`). WeftCut generates every
+  `segment` to `"Line"`, `tangent_mode` to `"Corner"`). LMCut generates every
   node and key id; sending `id` is refused. It replaces motion (annotated
   destructive); it does not fit or bake. Bounds: 1–128 nodes, coordinates
   within ±10 million px. A static `update_layer_params` `x`/`y` flattens XY
@@ -728,7 +728,7 @@ a `set_param_track` key: a preset `{"preset": "<id>"}` from
 the last key, which has none, the segment arriving at it, so keys authored in
 time order each carry the easing of the move into them. A lone key has no
 segment, and refuses one. Bulk authoring (`set_param_track`, `set_position`)
-refuses caller ids: WeftCut allocates UUIDs because native export requires
+refuses caller ids: LMCut allocates UUIDs because native export requires
 them, and project load rejects a non-UUID keyframe id rather than
 regenerating it. Every replacement mints fresh ids, so these tools are not
 idempotent. Values are typed by `param_key` (`{r,g,b,a}` for `color`).

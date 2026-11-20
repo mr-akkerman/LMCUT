@@ -62,9 +62,9 @@ export async function setVersion(version, root = ROOT) {
 // build), but the Linux targets keep their packaging conventions — `x86_64` for
 // AppImage and `amd64` for deb — even though both build with arch=x64.
 const INSTALLERS = {
-  'latest.yml': ['WeftCut-win-x64.exe'],
-  'latest-linux.yml': ['WeftCut-linux-x86_64.AppImage', 'WeftCut-linux-amd64.deb'],
-  'latest-mac.yml': ['WeftCut-mac-arm64.dmg'],
+  'latest.yml': ['LMCut-win-x64.exe'],
+  'latest-linux.yml': ['LMCut-linux-x86_64.AppImage', 'LMCut-linux-amd64.deb'],
+  'latest-mac.yml': ['LMCut-mac-arm64.dmg'],
 }
 
 // Refuse a partial or stale release BEFORE creating/uploading a draft. Stream
@@ -80,7 +80,7 @@ export async function validateAssets(directory, version) {
   // AppImage's own sha512/size check below covers it. Only the DMG gets a
   // blockmap file nothing consumes (macOS does not self-update).
   const required = [
-    ...Object.values(INSTALLERS).flat(), 'WeftCut-win-x64.exe.blockmap', ...Object.keys(INSTALLERS),
+    ...Object.values(INSTALLERS).flat(), 'LMCut-win-x64.exe.blockmap', ...Object.keys(INSTALLERS),
   ]
   const names = await fs.readdir(directory)
   for (const file of required) {
@@ -88,7 +88,7 @@ export async function validateAssets(directory, version) {
       throw new Error(`Missing release asset: ${file}`)
     }
   }
-  const allowed = new Set([...required, 'WeftCut-mac-arm64.dmg.blockmap'])
+  const allowed = new Set([...required, 'LMCut-mac-arm64.dmg.blockmap'])
   for (const name of names) {
     if (!allowed.has(name)) throw new Error(`Unexpected release asset: ${name}`)
   }
@@ -126,13 +126,13 @@ export function releaseNotes() {
     '',
     `- **Windows** — run ${code(exe)}. The app keeps itself current: new versions download in the background and install when you quit.`,
     `- **Linux** — ${code(appImage)} (mark it executable first) or ${code(deb)}. Self-updates like Windows.`,
-    `- **macOS (Apple Silicon, macOS 13 or newer)** — open ${code(dmg)} and drag WeftCut into Applications. ` +
-      'The build is ad-hoc signed and not notarized (WeftCut has no Apple Developer ID), so macOS blocks the first launch: ' +
+    `- **macOS (Apple Silicon, macOS 13 or newer)** — open ${code(dmg)} and drag LMCut into Applications. ` +
+      'The build is ad-hoc signed and not notarized (LMCut has no Apple Developer ID), so macOS blocks the first launch: ' +
       'open the app once, click **Done**, then go to **System Settings → Privacy & Security** and click **Open Anyway**. ' +
       'If macOS calls the app *damaged* instead, clear the download quarantine in Terminal and open it again:',
     '',
     '  ```sh',
-    '  xattr -dr com.apple.quarantine /Applications/WeftCut.app',
+    '  xattr -dr com.apple.quarantine /Applications/LMCut.app',
     '  ```',
     '',
     '  macOS builds do not self-update; watch this page for new versions.',
@@ -174,7 +174,7 @@ async function main() {
     // pipeline owns its version tags, created with the draft at this exact SHA.
     const remote = execFileSync('git', ['ls-remote', '--tags', 'origin', `refs/tags/${tag}`], { encoding: 'utf8' }).trim()
     if (remote) throw new Error(`Tag ${tag} already exists without a matching draft`)
-    gh(['release', 'create', tag, '--target', process.env.GITHUB_SHA, '--draft', '--title', `WeftCut ${version}`,
+    gh(['release', 'create', tag, '--target', process.env.GITHUB_SHA, '--draft', '--title', `LMCut ${version}`,
       '--generate-notes', '--notes', releaseNotes()])
   }
   gh(['release', 'upload', tag, ...files, '--clobber'])

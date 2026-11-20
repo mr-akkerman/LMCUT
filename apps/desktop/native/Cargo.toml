@@ -8,9 +8,9 @@ members = ["eval", "conversion", "decode", "reaper"]
 name = "weftcut"
 version = "0.0.0"
 edition = "2021"
-description = "WeftCut desktop app"
+description = "LMCut desktop app"
 license = "MIT"
-authors = ["WeftCut"]
+authors = ["LMCut"]
 publish = false
 rust-version = "1.88"
 
@@ -33,7 +33,7 @@ weftcut-eval = { path = "eval", features = ["serde"] }
 # the app dies; see reaper/src/lib.rs.
 weftcut-reaper = { path = "reaper" }
 
-# napi-rs: WeftCut's domain core is exposed to Electron as a native addon.
+# napi-rs: LMCut's domain core is exposed to Electron as a native addon.
 # `dyn-symbols` is a NAPI-RS v3 DEFAULT: the addon resolves the host's `napi_*`
 # entry points via dynamic lookup at load time rather than baking them in as hard
 # import records. It was dropped when defaults were switched off (2026-06-17)

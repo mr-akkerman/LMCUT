@@ -27,7 +27,7 @@ function se(over: Partial<ShimEnv> = {}): ShimEnv {
   return {
     platform: 'win32',
     env: {},
-    execPath: 'C:\\Program Files\\WeftCut\\WeftCut.exe',
+    execPath: 'C:\\Program Files\\LMCut\\LMCut.exe',
     scriptPath: 'C:\\somewhere\\weftcut-mcp.cjs',
     homedir: 'C:\\Users\\u',
     ...over,
@@ -50,7 +50,7 @@ describe('resolveUserDataDir', () => {
   it('falls back to the platform default when nothing is discoverable', () => {
     const appData = tmpDir()
     const resolved = resolveUserDataDir(se({ env: { APPDATA: appData } }))
-    expect(resolved).toBe(path.join(appData, 'WeftCut'))
+    expect(resolved).toBe(path.join(appData, 'LMCut'))
   })
 
   it('prefers whichever default candidate actually holds mcp_auth.json (dev nested name)', () => {
@@ -81,13 +81,13 @@ describe('readAuth', () => {
 
 describe('launchTarget', () => {
   it('WEFTCUT_APP override wins', () => {
-    const t = launchTarget(se({ env: { WEFTCUT_APP: 'C:\\dev\\WeftCut.exe' } }))
-    expect(t).toEqual({ path: 'C:\\dev\\WeftCut.exe', launchable: true })
+    const t = launchTarget(se({ env: { WEFTCUT_APP: 'C:\\dev\\LMCut.exe' } }))
+    expect(t).toEqual({ path: 'C:\\dev\\LMCut.exe', launchable: true })
   })
 
   it('prefers $APPIMAGE over the (transient-mount) execPath', () => {
-    const t = launchTarget(se({ env: { APPIMAGE: '/home/u/WeftCut.AppImage' } }))
-    expect(t).toEqual({ path: '/home/u/WeftCut.AppImage', launchable: true })
+    const t = launchTarget(se({ env: { APPIMAGE: '/home/u/LMCut.AppImage' } }))
+    expect(t).toEqual({ path: '/home/u/LMCut.AppImage', launchable: true })
   })
 
   it('the app binary itself is launchable; a plain node interpreter is not', () => {
@@ -101,22 +101,22 @@ describe('clientConfig', () => {
   it('emits the exe + shim path + env triple with no URL and no token', () => {
     const cfg = clientConfig(se(), 'C:\\ud')
     expect(cfg).toEqual({
-      command: 'C:\\Program Files\\WeftCut\\WeftCut.exe',
+      command: 'C:\\Program Files\\LMCut\\LMCut.exe',
       args: ['C:\\somewhere\\weftcut-mcp.cjs'],
       env: { ELECTRON_RUN_AS_NODE: '1', WEFTCUT_USERDATA: 'C:\\ud' },
     })
   })
 
   it('uses the .AppImage file as the command when running from one', () => {
-    const cfg = clientConfig(se({ env: { APPIMAGE: '/apps/WeftCut.AppImage' } }), '/ud')
-    expect(cfg.command).toBe('/apps/WeftCut.AppImage')
+    const cfg = clientConfig(se({ env: { APPIMAGE: '/apps/LMCut.AppImage' } }), '/ud')
+    expect(cfg.command).toBe('/apps/LMCut.AppImage')
   })
 
   it('round-trips through JSON with Windows backslashes intact', () => {
     const parsed = JSON.parse(clientConfigJson(se(), 'C:\\ud')) as {
       mcpServers: { weftcut: { command: string } }
     }
-    expect(parsed.mcpServers.weftcut.command).toBe('C:\\Program Files\\WeftCut\\WeftCut.exe')
+    expect(parsed.mcpServers.weftcut.command).toBe('C:\\Program Files\\LMCut\\LMCut.exe')
   })
 })
 

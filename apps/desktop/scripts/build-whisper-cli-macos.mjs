@@ -1,4 +1,4 @@
-// Builds the WeftCut-published macOS arm64 `whisper-cli` content artifact.
+// Builds the LMCut-published macOS arm64 `whisper-cli` content artifact.
 //
 // whisper.cpp publishes no macOS CLI — v1.9.1's only Apple asset is an
 // xcframework, a library for apps to link, which the whisper.cpp speech backend

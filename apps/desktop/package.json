@@ -1,12 +1,12 @@
 {
   "name": "@weftcut/desktop",
-  "productName": "WeftCut",
+  "productName": "LMCut",
   "version": "0.7.1",
-  "description": "WeftCut video editor desktop app",
-  "homepage": "https://github.com/WeftCut/WeftCut",
+  "description": "LMCut video editor desktop app",
+  "homepage": "https://github.com/mr-akkerman/LMCUT",
   "author": {
-    "name": "UncleChair",
-    "email": "voidgun1998@gmail.com"
+    "name": "mr-akkerman",
+    "email": "mr-akkerman@users.noreply.github.com"
   },
   "license": "MIT",
   "private": true,

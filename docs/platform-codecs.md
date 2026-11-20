@@ -196,7 +196,7 @@ cannot decode an admitted codec, the pre-flight probe route-corrects the source
 ## Unmeasured and deferred
 
 - **Open defect:** macOS window restoration,
-  [#142](https://github.com/WeftCut/WeftCut/issues/142).
+  #142 of the original WeftCut project.
 - **Unmeasured, no issue:** P3 color-pick/readback; cross-distro VAAPI;
   QSV/AMF/VAAPI encoders; Windows/macOS degraded auto-download and SOCKS;
   ProRes-engine Mac throughput/seek baseline

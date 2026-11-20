@@ -1,4 +1,4 @@
-# Contributing to WeftCut
+# Contributing to LMCut
 
 Thanks for helping out. These rules keep contributions consistent and reviews
 focused.
@@ -20,10 +20,10 @@ low-quality PR may be closed without a detailed review.
 An issue is accepted once the maintainer says so in it. An open issue alone is
 not acceptance.
 
-Issues labelled [`help wanted`](https://github.com/WeftCut/WeftCut/labels/help%20wanted)
+Issues labelled [`help wanted`](https://github.com/mr-akkerman/LMCUT/labels/help%20wanted)
 are good places to start. They can be broad, so say in the issue which piece you
 want to take and wait for it to be accepted. Questions and early ideas go in
-[Discussions](https://github.com/WeftCut/WeftCut/discussions), and security
+[Discussions](https://github.com/mr-akkerman/LMCUT/discussions), and security
 reports follow [SECURITY.md](SECURITY.md).
 
 ## What is not being taken right now

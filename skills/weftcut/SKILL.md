@@ -1,11 +1,11 @@
 ---
 name: weftcut
-description: Drive the WeftCut video editor over its MCP tools. Use BEFORE calling any weftcut MCP tool, and whenever the weftcut MCP server is connected and the user wants a video or clip edited — cut, trim, tighten, remove pauses, add captions, titles, lower thirds or callouts, cut a social version — even if they do not name WeftCut; also to author or update a Motif (animated overlay).
+description: Drive the LMCut video editor over its MCP tools. Use BEFORE calling any weftcut MCP tool, and whenever the weftcut MCP server is connected and the user wants a video or clip edited — cut, trim, tighten, remove pauses, add captions, titles, lower thirds or callouts, cut a social version — even if they do not name LMCut; also to author or update a Motif (animated overlay).
 ---
 
-# Driving WeftCut
+# Driving LMCut
 
-WeftCut is a desktop video editor; you operate it over MCP while the user
+LMCut is a desktop video editor; you operate it over MCP while the user
 watches the same project live in the app. Every mutation you commit lands in
 their undo history and on their screen. Each tool's own description carries its
 contract, and each refusal names its cause and options — this skill covers only
@@ -19,7 +19,7 @@ the server's version: if it differs from this skill's `metadata.version`, this
 copy is stale, so read `skill://weftcut/SKILL.md` (always the running version)
 instead, and replace this copy with the app's (Settings > Agent).
 
-WeftCut is a desktop video editor; the user watches the same project live, and every edit you commit lands in their undo history. A video the user asks you to edit is the project open in WeftCut, named or not.
+LMCut is a desktop video editor; the user watches the same project live, and every edit you commit lands in their undo history. A video the user asks you to edit is the project open in LMCut, named or not.
 1. Read `project://tracks` (or `read_project` view "tracks") before your first edit; ids come from reads, never memory.
 2. Every mutator answers with the committed record (minted ids, the span as it landed, `adjusted` for a grid snap); verify from it before reporting.
 3. A refusal (isError) names the cause and the fix: act on it, never retry the call verbatim.
@@ -166,7 +166,7 @@ prop; moving footage stays a video layer.
    more with non-default props. Fix invalid sources before proposing.
 3. **Motif publication waits for the user's approval in the app.** Place the
    draft with `add_layers` when useful, then `install_motif` the reviewed
-   revision: it only proposes. Tell the user to approve it in WeftCut's Motifs
+   revision: it only proposes. Tell the user to approve it in LMCut's Motifs
    panel and stop; do not poll and do not report it published. `list_motifs`
    shows the outcome and any note. Remove trial layers afterwards unless the
    user wants them kept.

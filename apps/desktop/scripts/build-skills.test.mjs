@@ -7,10 +7,10 @@ import { assertSkillLayout, assertSkillVersions, stampSkillVersion, REQUIRED_DOC
 
 const SKILL = `---
 name: weftcut
-description: Drive the WeftCut video editor over its MCP tools.
+description: Drive the LMCut video editor over its MCP tools.
 ---
 
-# Driving WeftCut
+# Driving LMCut
 `
 
 test('build:skills stamps the staged skill with the version of the app staging it', () => {
@@ -19,12 +19,12 @@ test('build:skills stamps the staged skill with the version of the app staging i
     out,
     `---
 name: weftcut
-description: Drive the WeftCut video editor over its MCP tools.
+description: Drive the LMCut video editor over its MCP tools.
 metadata:
   version: '0.1.7'
 ---
 
-# Driving WeftCut
+# Driving LMCut
 `,
   )
 })
@@ -34,7 +34,7 @@ test('the version is quoted, so a two-part version stays a string instead of a f
 })
 
 test('a skill with no frontmatter fails the build instead of shipping unstamped', () => {
-  assert.throws(() => stampSkillVersion('# Driving WeftCut\n', '0.1.7'), /no YAML frontmatter/)
+  assert.throws(() => stampSkillVersion('# Driving LMCut\n', '0.1.7'), /no YAML frontmatter/)
 })
 
 test('an author-written metadata block fails loudly rather than being clobbered', () => {

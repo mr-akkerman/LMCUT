@@ -1,4 +1,4 @@
-//! WeftCut native decode component (`@weftcut/native-decode`): the optional
+//! LMCut native decode component (`@weftcut/native-decode`): the optional
 //! preview-decode runtime (SW libavcodec lane everywhere, D3D11 GPU lane on
 //! Windows) plus the cross-platform export-decode lane (`export_sw`). Lazily
 //! required by Electron main; absence must never affect `@weftcut/core`. See
